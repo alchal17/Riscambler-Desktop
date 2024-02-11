@@ -8,5 +8,9 @@ class IntRegister(regName: String, regAltName: String, regData: Int = 0) : Regis
             _regData = value
         }
 
+    override fun getValue(): String {
+        return _regData.toString()
+    }
+
     override fun toString() = "{regName: $regName; regAltName: $regAltName; regData: $_regData"
 }

@@ -8,5 +8,9 @@ class FloatRegister(regName: String, regAltName: String, regData: Double = 0.0) 
             _regData = value
         }
 
+    override fun getValue(): String {
+        return _regData.toString()
+    }
+
     override fun toString() = "{regName: $regName; regAltName: $regAltName; regData: $_regData"
 }

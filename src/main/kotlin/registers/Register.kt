@@ -8,4 +8,5 @@ abstract class Register(regName: String, regAltName: String) {
         get() = _regName
     val regAltName: String
         get() = _regAltName
+    abstract fun getValue(): String
 }

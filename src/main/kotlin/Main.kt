@@ -25,7 +25,7 @@ import registers.Register
 
 
 fun main() = application {
-    Window(onCloseRequest = ::exitApplication) {
+    Window(title = "Riscambler", onCloseRequest = ::exitApplication) {
         val registers = listOf<Register>(
             IntRegister(regName = "x0", regAltName = "zero"),
             IntRegister(regName = "x1", regAltName = "ra"),
