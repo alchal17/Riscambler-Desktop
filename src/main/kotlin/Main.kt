@@ -1,5 +1,6 @@
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -66,8 +67,10 @@ fun App() {
 
 @Composable
 fun MainWindow(registers: SnapshotStateList<Register>) {
-    Box(modifier = Modifier.fillMaxSize().background(color = Color.Cyan)) {
-        LazyColumn(modifier = Modifier.fillMaxWidth() ,content = { items(registers) { Text(it.regName) } })
+    Box(
+        modifier = Modifier.fillMaxSize().background(color = Color.Cyan)
+            .clickable { registers.add(IntRegister("wewe", "wfwefwef")) }) {
+        LazyColumn(modifier = Modifier.fillMaxWidth(), content = { items(registers) { Text(it.regName) } })
     }
 }
 
