@@ -1,11 +1,11 @@
 package registers
 
-abstract class Register {
-    protected val regName: String
-    protected val regAltName: String
+abstract class Register(regName: String, regAltName: String) {
+    protected val _regName: String = regName
+    protected val _regAltName: String = regAltName
 
-    constructor(regName: String, regAltName: String) {
-        this.regName = regName
-        this.regAltName = regAltName
-    }
+    val regName: String
+        get() = _regName
+    val regAltName: String
+        get() = _regAltName
 }
