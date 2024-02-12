@@ -1,19 +1,18 @@
 package operations.op_functions.math
 
-import registers.IntRegister
-import registers.FloatRegister
+import registers.Register
 
 sealed class Math {
     class IntMath {
-        fun add(dstRegister: IntRegister, operands: List<IntRegister>) {
-            var sum = 0
+        fun add(dstRegister: Register, operands: List<Register>) {
+            var sum: Long = 0
             for (i in 1..operands.size) {
                 sum += operands[i].regData
             }
             dstRegister.regData = sum
         }
 
-        fun sub(dstRegister: IntRegister, operands: List<IntRegister>) {
+        fun sub(dstRegister: Register, operands: List<Register>) {
             var res = operands[1].regData
             for (i in 2..operands.size) {
                 res -= operands[i].regData
@@ -23,15 +22,15 @@ sealed class Math {
     }
 
     class FloatMath {
-        fun fadd(dstRegister: FloatRegister, operands: List<FloatRegister>) {
-            var fsum = 0.0
+        fun fadd(dstRegister: Register, operands: List<Register>) {
+            var fsum: Long = 0
             for (i in 1..operands.size) {
                 fsum += operands[i].regData
             }
             dstRegister.regData = fsum
         }
 
-        fun fsub(dstRegister: FloatRegister, operands: List<FloatRegister>) {
+        fun fsub(dstRegister: Register, operands: List<Register>) {
             var fres = operands[1].regData
             for (i in 2..operands.size) {
                 fres -= operands[i].regData

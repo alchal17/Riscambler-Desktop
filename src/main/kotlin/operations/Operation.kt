@@ -1,8 +1,6 @@
 package operations
 
 import registers.Register
-import registers.IntRegister
-import registers.FloatRegister
 
 import operations.op_types.ArithmeticOps
 import operations.op_types.ComparisonOps
@@ -25,16 +23,16 @@ sealed class Operation (
         private val cmdType: ArithmeticOps
     ) : Operation(opName, opDescr, instType) {
         override fun execute(operands: List<Register>) {
-            when (cmdType) {
-                ArithmeticOps.ADD -> Math.IntMath().add(operands[0] as IntRegister, operands as List<IntRegister>)
-                ArithmeticOps.SUB -> Math.IntMath().sub(operands[0] as IntRegister, operands as List<IntRegister>)
-                ArithmeticOps.FADD -> Math.FloatMath().fadd(operands[0] as FloatRegister, operands as List<FloatRegister>)
-                ArithmeticOps.FSUB -> Math.FloatMath().fsub(operands[0] as FloatRegister, operands as List<FloatRegister>)
-                ArithmeticOps.MUL -> TODO()
-                ArithmeticOps.DIV -> TODO()
-                ArithmeticOps.REM -> TODO()
-                ArithmeticOps.NEG -> TODO()
-            }
+//            when (cmdType) {
+//                ArithmeticOps.ADD -> Math.IntMath().add(operands[0] as IntRegister, operands as List<IntRegister>)
+//                ArithmeticOps.SUB -> Math.IntMath().sub(operands[0] as IntRegister, operands as List<IntRegister>)
+//                ArithmeticOps.FADD -> Math.FloatMath().fadd(operands[0] as FloatRegister, operands as List<FloatRegister>)
+//                ArithmeticOps.FSUB -> Math.FloatMath().fsub(operands[0] as FloatRegister, operands as List<FloatRegister>)
+//                ArithmeticOps.MUL -> TODO()
+//                ArithmeticOps.DIV -> TODO()
+//                ArithmeticOps.REM -> TODO()
+//                ArithmeticOps.NEG -> TODO()
+//            }
         }
     }
 

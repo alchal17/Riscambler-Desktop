@@ -17,14 +17,16 @@ import registers.Register
 @Composable
 fun RegistersTable(registers: SnapshotStateList<Register>) {
     Column(modifier = Modifier.clip(shape = RoundedCornerShape(10.dp)).background(color = Color.Black)) {
-        RegisterRow(listOf("Name", "Alt name", "Value"))
+        RegisterRow(listOf("Name", "Alt name", "Integer", "Binary", "Hex"))
         LazyColumn(modifier = Modifier.fillMaxWidth()) {
             items(registers) { register ->
                 RegisterRow(
                     listOf(
                         register.regName,
                         register.regAltName,
-                        register.getValue()
+                        register.regData.toString(),
+                        register.regData.toString(2),
+                        register.regData.toString(16),
                     )
                 )
             }

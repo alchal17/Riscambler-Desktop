@@ -15,6 +15,6 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun RegisterRowGrid(value: String) {
     Box(modifier = Modifier.padding(1.dp).background(color = Color.LightGray).fillMaxWidth()) {
-        Text(value)
+        Text(value, modifier = Modifier.padding(2.dp))
     }
 }
