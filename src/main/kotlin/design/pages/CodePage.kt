@@ -6,6 +6,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.runtime.*
@@ -22,10 +23,15 @@ import androidx.compose.ui.text.platform.Font
 import androidx.compose.ui.unit.dp
 import design.components.RegistersTable
 import registers.Register
+import sys.CodeRunner
+import sys.Status
 
 @Composable
 fun CodePage(registers: SnapshotStateList<Register>) {
     var code by remember { mutableStateOf("") }
+    var displayErrorWindow by remember { mutableStateOf(false) }
+    var errorDescription by remember { mutableStateOf("") }
+
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         Column(
             modifier = Modifier.fillMaxSize(0.9f).padding(),
@@ -34,7 +40,16 @@ fun CodePage(registers: SnapshotStateList<Register>) {
         ) {
             Row(modifier = Modifier.fillMaxWidth()) {
                 IconButton(
-                    onClick = {},
+                    onClick = {
+                        val status = CodeRunner.runCode(code, registers)
+                        if (status is Status.Error) {
+                            errorDescription = status.errorMessage
+                            displayErrorWindow = true
+                        } else {
+                            errorDescription = ""
+                            displayErrorWindow = false
+                        }
+                    },
                     modifier = Modifier.clip(shape = RoundedCornerShape(5.dp)).background(color = Color.Green)
                 ) {
                     Icon(
@@ -42,6 +57,10 @@ fun CodePage(registers: SnapshotStateList<Register>) {
                         contentDescription = "Run a program",
                         modifier = Modifier.clip(shape = RoundedCornerShape(5.dp)).background(color = Color.Green)
                     )
+                }
+
+                if (displayErrorWindow) {
+                    Text(text = errorDescription)
                 }
             }
 
