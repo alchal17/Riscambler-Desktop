@@ -1,6 +1,6 @@
 package operations
 
-data class Operation (
-    val opName: OpType,
-    val operands: List<String>
-)
+import androidx.compose.runtime.snapshots.SnapshotStateList
+import registers.Register
+
+data class Operation(val type: OpType, val operationFun: (SnapshotStateList<Register>, List<String>) -> Unit)

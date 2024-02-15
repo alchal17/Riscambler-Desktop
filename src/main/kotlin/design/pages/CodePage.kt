@@ -6,7 +6,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.runtime.*
@@ -25,14 +24,10 @@ import androidx.compose.ui.unit.sp
 import design.components.RegistersTable
 import registers.Register
 import sys.CodeRunner
-import sys.Status
 
 @Composable
 fun CodePage(registers: SnapshotStateList<Register>) {
     var code by remember { mutableStateOf("") }
-    var displayErrorWindow by remember { mutableStateOf(false) }
-    var errorDescription by remember { mutableStateOf("") }
-
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         Column(
             modifier = Modifier.fillMaxSize(0.9f).padding(),
@@ -42,14 +37,8 @@ fun CodePage(registers: SnapshotStateList<Register>) {
             Row(modifier = Modifier.fillMaxWidth()) {
                 IconButton(
                     onClick = {
-                        val status = CodeRunner.runCode(code, registers)
-                        if (status is Status.Error) {
-                            errorDescription = status.errorMessage
-                            displayErrorWindow = true
-                        } else {
-                            errorDescription = ""
-                            displayErrorWindow = false
-                        }
+                        CodeRunner.runCode(code, registers)
+                        val status = CodeRunner.status
                     },
                     modifier = Modifier.clip(shape = RoundedCornerShape(5.dp)).background(color = Color.Green)
                 ) {
@@ -58,10 +47,6 @@ fun CodePage(registers: SnapshotStateList<Register>) {
                         contentDescription = "Run a program",
                         modifier = Modifier.clip(shape = RoundedCornerShape(5.dp)).background(color = Color.Green)
                     )
-                }
-
-                if (displayErrorWindow) {
-                    Text(text = errorDescription)
                 }
             }
 
@@ -77,8 +62,7 @@ fun CodePage(registers: SnapshotStateList<Register>) {
                             weight = FontWeight.Thin,
                             style = FontStyle.Normal
                         )
-                    ),
-                    fontSize = 40.sp
+                    ), fontSize = 80.sp
                 )
             )
             RegistersTable(registers)
