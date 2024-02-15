@@ -21,6 +21,7 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.platform.Font
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import design.components.RegistersTable
 import registers.Register
 import sys.CodeRunner
@@ -76,7 +77,8 @@ fun CodePage(registers: SnapshotStateList<Register>) {
                             weight = FontWeight.Thin,
                             style = FontStyle.Normal
                         )
-                    )
+                    ),
+                    fontSize = 40.sp
                 )
             )
             RegistersTable(registers)
