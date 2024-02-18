@@ -12,33 +12,30 @@ class Register(regName: String, regAltName: String, regData: Long = 0) {
         get() = _regName
     val regAltName: String
         get() = _regAltName
-    var regData: Long
+    var regValue: Long
         get() = _regValue
         set(value) {
             if (regName != "x0" && regAltName != "zero") {
                 _regValue = value
+                if (_regValue > maxValue){
+                    _regValue %= maxValue
+                }
             }
         }
 
     operator fun plus(other: Register): Register {
-        return Register(regName, regAltName, _regValue + other.regData)
+        return Register(regName, regAltName, _regValue + other.regValue)
     }
 
     operator fun minus(other: Register): Register {
-        return Register(regName, regAltName, _regValue - other.regData)
+        return Register(regName, regAltName, _regValue - other.regValue)
     }
 
     operator fun plusAssign(other: Register) {
-        regData += other.regData
-        if (_regValue > maxValue){
-            regData -= maxValue
-        }
+        regValue += other.regValue
     }
 
     operator fun minusAssign(other: Register) {
-        regData -= other.regData
-        if (_regValue < minValue){
-            regData = maxValue - other.regData
-        }
+        regValue -= other.regValue
     }
 }

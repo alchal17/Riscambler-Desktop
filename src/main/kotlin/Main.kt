@@ -8,7 +8,7 @@ import registers.Register
 
 fun main() = application {
     Window(title = "Riscambler", onCloseRequest = ::exitApplication) {
-        val registers = listOf<Register>(
+        val registers = listOf(
             Register(regName = "x0", regAltName = "zero"),
             Register(regName = "x1", regAltName = "ra"),
             Register(regName = "x2", regAltName = "sp"),
@@ -42,9 +42,8 @@ fun main() = application {
             Register(regName = "x30", regAltName = "t5"),
             Register(regName = "x31", regAltName = "t6"),
         )
-        val registerState = mutableStateListOf(*registers.toTypedArray())
         MaterialTheme {
-            CodePage(registerState)
+            CodePage(registers)
         }
     }
 }

@@ -24,9 +24,9 @@ fun RegistersTable(registers: SnapshotStateList<Register>) {
                     listOf(
                         register.regName,
                         register.regAltName,
-                        register.regData.toString(),
-                        register.regData.toString(2),
-                        register.regData.toString(16),
+                        register.regValue.toString(),
+                        register.regValue.toString(2),
+                        register.regValue.toString(16),
                     )
                 )
             }

@@ -1,15 +1,16 @@
 package sys
 
+import ExpressionParser
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import operations.LineData
 import operations.OpType
-import operations.Operation
 import operations.OperationImplementations
 import registers.Register
 
 class CodeRunner {
     companion object {
-        var status: Status = Status.Success
+        private val operationExecuter = OperationImplementations()
+
         private val operations = listOf(
             OpType.ArithmeticOps.ADD,
             OpType.ArithmeticOps.ADDI,
@@ -63,7 +64,7 @@ class CodeRunner {
             return operations.find { it.name == command.uppercase() }
         }
 
-        private fun codeParser(userCode: String): List<LineData> {
+        private fun getLinesAsData(userCode: String): List<LineData> {
             val codeLines = userCode.split("\n")
             val strippedCodeLines = codeLines.map { it.strip() }
             val ops = mutableListOf<LineData>()
@@ -78,17 +79,33 @@ class CodeRunner {
             return ops
         }
 
-        private fun runLines(lineDatas: List<LineData>, registers: SnapshotStateList<Register>) {
-            lineDatas.forEach { lineData ->
-                if (lineData.type is OpType.ArithmeticOps.ADD){
-                    OperationImplementations.ADD(registers, params = lineData.operands)
+        private fun runLines(lineDatas: List<LineData>, registers: SnapshotStateList<Register>): Status {
+            var status: Status = Status.Success
+            lineDatas.forEachIndexed { index, lineData ->
+                when (lineData.type) {
+                    is OpType.ArithmeticOps.ADD -> {
+                        status =
+                            operationExecuter.ADD(params = lineData.operands, registers = registers, line = index + 1)
+                    }
+
+                    is OpType.ArithmeticOps.ADDI -> {
+                        status =
+                            operationExecuter.ADDI(params = lineData.operands, registers = registers, line = index + 1)
+                    }
+
+                    else -> {}
+                }
+                if (status is Status.Error){
+                    return status
                 }
             }
+            return status
         }
 
-        fun runCode(codeString: String, registers: SnapshotStateList<Register>) {
-            status = Status.Success
-            val strippedLinesData = codeParser(codeString)
+        fun runCode(codeString: String, registers: SnapshotStateList<Register>): Status {
+            val strippedLinesData = getLinesAsData(codeString)
+            val a = runLines(strippedLinesData, registers)
+            return a
         }
     }
 }
