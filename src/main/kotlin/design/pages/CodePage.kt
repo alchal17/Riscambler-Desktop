@@ -30,6 +30,7 @@ import sys.Status
 
 @Composable
 fun CodePage(registers: List<Register>) {
+    val codeRunner = CodeRunner()
     var registerState by remember { mutableStateOf(registers.toMutableStateList()) }
     var code by remember { mutableStateOf("") }
     var errorText by remember { mutableStateOf("") }
@@ -43,7 +44,7 @@ fun CodePage(registers: List<Register>) {
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                 IconButton(
                     onClick = {
-                        val status = CodeRunner.runCode(code, registerState)
+                        val status = codeRunner.runCode(codeString = code, registers = registerState)
                         registerState = registers.toMutableStateList()
                         if (status is Status.Error) {
                             errorVisible = true

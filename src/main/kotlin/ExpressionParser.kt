@@ -17,20 +17,20 @@ class ExpressionParser {
             val param1 = params[0]
             val param2 = params[1]
             val param3 = params[2]
-            val reg1 = registers.find { param1 in listOf(it.regName, it.regAltName) }
-            val reg2 = registers.find { param2 in listOf(it.regName, it.regAltName) }
-            val reg3 = registers.find { param3 in listOf(it.regName, it.regAltName) }
-            if (listOf(reg1, reg2, reg3).contains(null)) {
+            val index1 = registers.indexOfFirst { param1 in listOf(it.regName, it.regValue) }
+            val index2 = registers.indexOfFirst { param2 in listOf(it.regName, it.regValue) }
+            val index3 = registers.indexOfFirst { param3 in listOf(it.regName, it.regValue) }
+            if (listOf(index1, index2, index3).contains(-1)) {
                 status = Status.Error("Line $line: error. Wrong arguments")
             } else {
                 argumentsContainer = ThreeArgumentsContainer(
-                    registers.indexOf(reg1).toString(),
-                    registers.indexOf(reg2).toString(),
-                    registers.indexOf(reg3).toString()
+                    param1 = index1.toString(),
+                    param2 = index2.toString(),
+                    param3 = index3.toString()
                 )
             }
         }
-        return Pair(argumentsContainer, status)
+        return Pair(first = argumentsContainer, second = status)
     }
 
     //returns two indexes of registers and int
@@ -47,19 +47,19 @@ class ExpressionParser {
             val param1 = params[0]
             val param2 = params[1]
             val param3 = params[2]
-            val reg1 = registers.find { param1 in listOf(it.regName, it.regAltName) }
-            val reg2 = registers.find { param2 in listOf(it.regName, it.regAltName) }
+            val index1 = registers.indexOfFirst { param1 in listOf(it.regName, it.regValue) }
+            val index2 = registers.indexOfFirst { param2 in listOf(it.regName, it.regValue) }
             val int = param3.toIntOrNull()
-            if (listOf(reg1, reg2).contains(null) || int == null) {
+            if (listOf(index1, index2).contains(-1) || int == null) {
                 status = Status.Error("Line $line: error. Wrong arguments")
             } else {
                 argumentsContainer = ThreeArgumentsContainer(
-                    registers.indexOf(reg1).toString(),
-                    registers.indexOf(reg2).toString(),
-                    param3
+                    param1 = index1.toString(),
+                    param2 = index2.toString(),
+                    param3 = param3
                 )
             }
         }
-        return Pair(argumentsContainer, status)
+        return Pair(first = argumentsContainer, second = status)
     }
 }
