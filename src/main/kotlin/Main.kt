@@ -3,6 +3,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalViewConfiguration
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
@@ -18,7 +19,12 @@ fun main() = application {
     val height = Toolkit.getDefaultToolkit().screenSize.height
     val width = Toolkit.getDefaultToolkit().screenSize.width
     val state = rememberWindowState(width = (width / 2).dp, height = (height / 2).dp)
-    Window(title = "Riscambler",  onCloseRequest = ::exitApplication, state = state) {
+    Window(
+        title = "Riscambler",
+        onCloseRequest = ::exitApplication,
+        state = state,
+        icon = painterResource("icons/riscambler-logo-01.svg")
+    ) {
         val registers = listOf(
             Register(regName = "x0", regAltName = "zero"),
             Register(regName = "x1", regAltName = "ra"),
