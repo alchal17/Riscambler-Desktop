@@ -3,12 +3,16 @@ package design.pages
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.runtime.*
 import androidx.compose.runtime.snapshots.SnapshotStateList
@@ -23,6 +27,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.platform.Font
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import design.components.CustomTextField
 import design.components.RegistersTable
 import registers.Register
 import sys.CodeRunner
@@ -32,19 +37,52 @@ import sys.Status
 fun CodePage(registers: List<Register>) {
     val codeRunner = CodeRunner()
     var registerState by remember { mutableStateOf(registers.toMutableStateList()) }
-    var code by remember { mutableStateOf("") }
+    val code = remember { mutableStateOf("") }
     var errorText by remember { mutableStateOf("") }
     var errorVisible by remember { mutableStateOf(false) }
+    var fonSize by remember { mutableStateOf(40) }
+    val lineNumbers = (1..code.value.lines().size).toList()
+    val scrollState = rememberScrollState()
+
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         Column(
             modifier = Modifier.fillMaxSize(0.9f).padding(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(20.dp)
         ) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.End
+            ) {
+                Text("Font size: $fonSize")
+                Column {
+                    IconButton(onClick = {
+                        if (fonSize < 80) {
+                            fonSize += 5
+                        }
+                    }) {
+                        Icon(
+                            imageVector = Icons.Default.KeyboardArrowUp,
+                            contentDescription = null
+                        )
+                    }
+                    IconButton(onClick = {
+                        if (fonSize > 10) {
+                            fonSize -= 5
+                        }
+                    }) {
+                        Icon(
+                            imageVector = Icons.Default.KeyboardArrowDown,
+                            contentDescription = null
+                        )
+                    }
+                }
+            }
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                 IconButton(
                     onClick = {
-                        val status = codeRunner.runCode(codeString = code, registers = registerState)
+                        val status = codeRunner.runCode(codeString = code.value, registers = registerState)
                         registerState = registers.toMutableStateList()
                         if (status is Status.Error) {
                             errorVisible = true
@@ -69,21 +107,11 @@ fun CodePage(registers: List<Register>) {
                 }
 
             }
-
-            BasicTextField(
-                value = code,
-                onValueChange = { code = it },
-                modifier = Modifier.fillMaxWidth().fillMaxHeight(0.5f).clip(shape = RoundedCornerShape(10.dp))
-                    .background(color = Color.LightGray),
-                textStyle = TextStyle(
-                    fontFamily = FontFamily(
-                        Font(
-                            resource = "font/notosans_condensed_black.ttf",
-                            weight = FontWeight.Thin,
-                            style = FontStyle.Normal
-                        )
-                    ), fontSize = 80.sp
-                )
+            CustomTextField(
+                code = code,
+                lineNumbers = lineNumbers,
+                scrollState = scrollState,
+                fontSize = fonSize
             )
             RegistersTable(registerState)
         }
