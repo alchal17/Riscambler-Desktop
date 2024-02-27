@@ -16,7 +16,7 @@ sealed class OpType(
         data object ADD : ArithmeticOps("ADD", OperationImplementations::ADD)
         data object ADDI : ArithmeticOps("ADDI", OperationImplementations::ADDI)
         data object FADD : ArithmeticOps("FADD")
-        data object SUB : ArithmeticOps("SUB")
+        data object SUB : ArithmeticOps("SUB", OperationImplementations::SUB)
         data object FSUB : ArithmeticOps("FSUB")
         data object MUL : ArithmeticOps("MUL")
         data object DIV : ArithmeticOps("DIV")
