@@ -91,4 +91,33 @@ class CodeRunner {
         val strippedLinesData = getLinesAsData(codeString)
         return runLines(strippedLinesData, registers)
     }
+
+
+    private fun getSimilarCommands(command: String): List<String> {
+        val commands =
+            operations.filter { it.name.startsWith(command.uppercase()) || it.name.endsWith(command.uppercase()) }
+        return commands.map { it.name }
+    }
+
+    fun checkWarnings(codeString: String): List<String> {
+        val result = mutableListOf<String>()
+        var currentCommand: String
+        var possibleCommands: List<String>
+        var lineNumber = 1
+        for (line in codeString.split("\n")) {
+            currentCommand = line.strip().split(" ")[0]
+            if (currentCommand != "" && getCmdAsEnum(currentCommand) == null) {
+                possibleCommands = getSimilarCommands(currentCommand)
+                result.add(
+                    if (possibleCommands.isEmpty()) "Line $lineNumber: Unknown command: '$currentCommand'." else "Line $lineNumber: Unknown command: '$currentCommand'. Did you mean any of these: ${
+                        possibleCommands.joinToString(
+                            separator = ", "
+                        )
+                    }?"
+                )
+            }
+            lineNumber++
+        }
+        return result
+    }
 }

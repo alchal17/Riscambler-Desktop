@@ -3,6 +3,8 @@ package design.pages
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -14,12 +16,14 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material.icons.filled.Warning
 import androidx.compose.runtime.*
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
@@ -37,12 +41,14 @@ import sys.Status
 fun CodePage(registers: List<Register>) {
     val codeRunner = CodeRunner()
     var registerState by remember { mutableStateOf(registers.toMutableStateList()) }
-    val code = remember { mutableStateOf("") }
+    var code by remember { mutableStateOf("") }
     var errorText by remember { mutableStateOf("") }
     var errorVisible by remember { mutableStateOf(false) }
+    var warnings by remember { mutableStateOf(listOf<String>()) }
     var fonSize by remember { mutableStateOf(40) }
-    val lineNumbers = (1..code.value.lines().size).toList()
+    val lineNumbers = (1..code.lines().size).toList()
     val scrollState = rememberScrollState()
+
 
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         Column(
@@ -86,7 +92,7 @@ fun CodePage(registers: List<Register>) {
                         for (i in 0 until registerState.size) {
                             registerState[i].regValue = 0
                         }
-                        val status = codeRunner.runCode(codeString = code.value, registers = registerState)
+                        val status = codeRunner.runCode(codeString = code, registers = registerState)
                         registerState = registers.toMutableStateList()
                         if (status is Status.Error) {
                             errorVisible = true
@@ -104,11 +110,27 @@ fun CodePage(registers: List<Register>) {
                         modifier = Modifier.clip(shape = RoundedCornerShape(5.dp)).background(color = Color.Green)
                     )
                 }
-                AnimatedVisibility(visible = errorVisible) {
-                    Box(
-                        modifier = Modifier.fillMaxWidth(0.5f)
-                            .clip(shape = RoundedCornerShape(10.dp)).background(color = Color.Red)
-                    ) { Text(errorText, modifier = Modifier.padding(vertical = 2.dp, horizontal = 4.dp)) }
+                Column {
+                    AnimatedVisibility(visible = errorVisible) {
+                        Row(
+                            modifier = Modifier
+                                .clip(shape = RoundedCornerShape(10.dp)).background(color = Color.Red)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Warning,
+                                contentDescription = null,
+                                modifier = Modifier.padding(vertical = 2.dp, horizontal = 4.dp)
+                            )
+                            Text(errorText, modifier = Modifier.padding(vertical = 2.dp, horizontal = 4.dp))
+                        }
+                    }
+                    AnimatedVisibility(visible = warnings.isNotEmpty()) {
+                        LazyColumn(modifier = Modifier.background(color = Color.Yellow)) {
+                            items(warnings) {
+                                Text(text = it)
+                            }
+                        }
+                    }
                 }
 
             }
@@ -116,7 +138,11 @@ fun CodePage(registers: List<Register>) {
                 code = code,
                 lineNumbers = lineNumbers,
                 scrollState = scrollState,
-                fontSize = fonSize
+                fontSize = fonSize,
+                changeFunction = {
+                    code = it
+                    warnings = codeRunner.checkWarnings(it)
+                }
             )
             RegistersTable(registerState)
         }

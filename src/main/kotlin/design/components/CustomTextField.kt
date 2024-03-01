@@ -23,15 +23,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.platform.Font
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import sys.CodeRunner
 
 @Composable
 fun CustomTextField(
-    code: MutableState<String>,
+    code: String,
     lineNumbers: List<Int>,
     scrollState: ScrollState,
     shape: Shape = RoundedCornerShape(10.dp),
     bgColor: Color = Color.LightGray,
     fontSize: Int,
+    changeFunction: (String) -> Unit,
     textStyle: TextStyle = TextStyle(
         fontFamily = FontFamily(
             Font(
@@ -57,10 +59,8 @@ fun CustomTextField(
                 }
             }
             BasicTextField(
-                value = code.value,
-                onValueChange = { newCode ->
-                    code.value = newCode
-                },
+                value = code,
+                onValueChange = changeFunction,
                 modifier = Modifier.fillMaxSize().verticalScroll(scrollState),
                 textStyle = textStyle,
             )
