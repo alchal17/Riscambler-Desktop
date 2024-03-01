@@ -82,6 +82,10 @@ fun CodePage(registers: List<Register>) {
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                 IconButton(
                     onClick = {
+//                        esetting all register values to 0
+                        for (i in 0 until registerState.size) {
+                            registerState[i].regValue = 0
+                        }
                         val status = codeRunner.runCode(codeString = code.value, registers = registerState)
                         registerState = registers.toMutableStateList()
                         if (status is Status.Error) {
@@ -90,6 +94,7 @@ fun CodePage(registers: List<Register>) {
                         } else {
                             errorVisible = false
                         }
+                        registerState = registerState.toMutableStateList()
                     },
                     modifier = Modifier.clip(shape = RoundedCornerShape(5.dp)).background(color = Color.Green)
                 ) {
