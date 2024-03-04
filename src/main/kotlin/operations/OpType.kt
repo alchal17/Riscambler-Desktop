@@ -11,77 +11,83 @@ sealed class OpType(
     sealed class ArithmeticOps(
         name: String,
         function: ((List<String>, SnapshotStateList<Register>, Int) -> Status)? = null
-    ) :
-        OpType(name, function) {
-        data object ADD : ArithmeticOps("ADD", OperationImplementations::ADD)
-        data object ADDI : ArithmeticOps("ADDI", OperationImplementations::ADDI)
-        data object FADD : ArithmeticOps("FADD")
-        data object SUB : ArithmeticOps("SUB", OperationImplementations::SUB)
-        data object FSUB : ArithmeticOps("FSUB")
-        data object MUL : ArithmeticOps("MUL")
-        data object DIV : ArithmeticOps("DIV")
-        data object REM : ArithmeticOps("REM")
-        data object NEG : ArithmeticOps("NEG")
+    ) : OpType(name, function) {
+        data object ADD : ArithmeticOps("ADD", OperationImplementations::ADD)       // Add
+        data object ADDI : ArithmeticOps("ADDI", OperationImplementations::ADDI)    // Subtracts
+        data object SUB : ArithmeticOps("SUB", OperationImplementations::SUB)       // Add immediate
+        data object SLT : ArithmeticOps("SLT")                                      // Set less than
+        data object SLTI : ArithmeticOps("SLTI")                                    // Set less than immediate
+        data object SLTU : ArithmeticOps("SLTU")                                    // Set less than unsigned
+        data object SLTIU : ArithmeticOps("SLTIU")                                  // Set less than immediate unsigned
+        data object LUI : ArithmeticOps("LUI")                                      // Load upper immediate
+        data object AUIP : ArithmeticOps("AUIP")                                    // Add upper immediate to PC
     }
 
-    sealed class ControlTransferOps(
+    sealed class LoadStoreOps(
         name: String,
         function: ((List<String>, SnapshotStateList<Register>, Int) -> Status)? = null
     ) : OpType(name, function) {
-        data object JAL : ControlTransferOps("JAL")
-        data object JALR : ControlTransferOps("JALR")
-        data object BEQ : ControlTransferOps("BEQ")
-        data object BNE : ControlTransferOps("BNE")
-        data object BLT : ControlTransferOps("BLT")
-        data object BGE : ControlTransferOps("BGE")
-    }
-
-    sealed class ComparisonOps(
-        name: String,
-        function: ((List<String>, SnapshotStateList<Register>, Int) -> Status)? = null
-    ) : OpType(name, function) {
-        data object SLT : ComparisonOps("SLT")
-        data object SLTU : ComparisonOps("SLTU")
-        data object SLTI : ComparisonOps("SLTI")
-        data object SLTIU : ComparisonOps("SLTIU")
-    }
-
-    sealed class DataTransferOps(
-        name: String,
-        function: ((List<String>, SnapshotStateList<Register>, Int) -> Status)? = null
-    ) : OpType(name, function) {
-        data object LW : DataTransferOps("LW")
-        data object SW : DataTransferOps("SW")
-        data object LB : DataTransferOps("LB")
-        data object SB : DataTransferOps("SB")
+        data object LD : LoadStoreOps("LD")         // Load doubleword
+        data object LW : LoadStoreOps("LW")         // Load word
+        data object LH : LoadStoreOps("LH")         // Load halfword
+        data object LB : LoadStoreOps("LB")         // Load byte
+        data object LWU : LoadStoreOps("LWU")       // Load word unsigned
+        data object LHU : LoadStoreOps("LHU")       // Load halfword unsigned
+        data object LBU : LoadStoreOps("LBU")       // Load byte unsigned
+        data object SD : LoadStoreOps("SD")         // Store doubleword
+        data object SW : LoadStoreOps("SW")         // Store word
+        data object SH : LoadStoreOps("SH")         // Store halfword
+        data object SB : LoadStoreOps("SB")         // Store byte
     }
 
     sealed class LogicalOps(
         name: String,
         function: ((List<String>, SnapshotStateList<Register>, Int) -> Status)? = null
     ) : OpType(name, function) {
-        data object AND : LogicalOps("AND")
-        data object OR : LogicalOps("OR")
-        data object XOR : LogicalOps("XOR")
-        data object NOT : LogicalOps("NOT")
+        data object AND : LogicalOps("AND")             // AND
+        data object OR : LogicalOps("OR")               // OR
+        data object XOR : LogicalOps("XOR")             // XOR
+        data object ANDI : LogicalOps("ANDI")           // AND immediate
+        data object ORI : LogicalOps("ORI")             // OR immediate
+        data object XORI : LogicalOps("XORI")           // XOR immediate
+        data object SLL : LogicalOps("SLL")             // Shift left logical
+        data object SRL : LogicalOps("SRL")             // Shift right logical
+        data object SRA : LogicalOps("SRA")             // Shift right arithmetic
+        data object SLLI : LogicalOps("SLLI")           // Shift left logical immediate
+        data object SRLI : LogicalOps("SRLI")           // Shift right logical immediate
+        data object SRAI : LogicalOps("SRAI")           // Shift right arithmetic immediate
     }
 
-    sealed class ShiftAndBitManipulationOps(
+    sealed class BranchingOps (
         name: String,
         function: ((List<String>, SnapshotStateList<Register>, Int) -> Status)? = null
     ) : OpType(name, function) {
-        data object SLL : ShiftAndBitManipulationOps("SLL")
-        data object SRL : ShiftAndBitManipulationOps("SRL")
-        data object SRA : ShiftAndBitManipulationOps("SRA")
-        data object ROL : ShiftAndBitManipulationOps("ROL")
-        data object ROR : ShiftAndBitManipulationOps("ROR")
+        data object BEQ : BranchingOps("BEQ")           // Branch equal
+        data object BNE : BranchingOps("BNE")           // Branch not equal
+        data object BGE : BranchingOps("BGE")           // Branch greater than or equal
+        data object BGEU : BranchingOps("BGEU")         // Branch greater than or equal unsigned
+        data object BLT : BranchingOps("BLT")           // Branch less than
+        data object BLTU : BranchingOps("BLTU")         // Branch less than unsigned
+        data object JAL : BranchingOps("JAL")           // Jump and link
+        data object JALR : BranchingOps("JALR")           // Jump and link register
     }
 
-    sealed class SysInstructions(
+    sealed class PseudoInstructionsOps(
         name: String,
         function: ((List<String>, SnapshotStateList<Register>, Int) -> Status)? = null
     ) : OpType(name, function) {
-        data object ECALL : SysInstructions("ECALL")
-        data object EBREAK : SysInstructions("EBREAK")
+        /*
+        * Operations of type "branch if" are currently not listed.
+        * To be implemented in future
+        */
+        data object LI : PseudoInstructionsOps("LI")            // Load immediate
+        data object LA : PseudoInstructionsOps("LA")            // Load absolute address
+        data object MV : PseudoInstructionsOps("MV")            // Copy register
+        data object NOT : PseudoInstructionsOps("NOT")          // One's complement
+        data object NEG : PseudoInstructionsOps("NEG")          // Two's complement
+        data object J : PseudoInstructionsOps("J")              // Unconditional jump
+        data object CALL : PseudoInstructionsOps("CALL")        // Call subroutine
+        data object RET : PseudoInstructionsOps("RET")          // Return from subroutine
+        data object NOP : PseudoInstructionsOps("NOP")          // No operation
     }
 }
