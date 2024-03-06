@@ -5,15 +5,11 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
@@ -23,7 +19,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.platform.Font
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import sys.CodeRunner
+import height
 
 @Composable
 fun CustomTextField(
@@ -41,19 +37,20 @@ fun CustomTextField(
                 weight = FontWeight.Thin,
                 style = FontStyle.Normal
             ),
-        ), fontSize = fontSize.sp
+        ),
+        fontSize = fontSize.sp,
+        lineHeight = 50.sp
     )
 ) {
-    Box(modifier = Modifier.fillMaxHeight(0.5f).fillMaxWidth().clip(shape = shape).background(color = bgColor)) {
+    Box(modifier = Modifier.height((height / 2).dp).fillMaxWidth().clip(shape = shape).background(color = bgColor)) {
         Row {
             Box(
                 modifier = Modifier.verticalScroll(scrollState)
             ) {
-                Column {
+                Column(modifier = Modifier.padding(horizontal = 4.dp)) {
                     lineNumbers.forEach { lineNumber ->
                         Text(
-                            text = "$lineNumber. ",
-                            modifier = Modifier.padding(horizontal = 4.dp), fontSize = fontSize.sp
+                            text = "$lineNumber. ", fontSize = fontSize.sp, modifier = Modifier.height(50.dp)
                         )
                     }
                 }

@@ -1,5 +1,7 @@
 package registers
 
+import kotlin.math.abs
+
 class Register(regName: String, regAltName: String, regData: Long = 0) {
     private val _regName: String = regName
     private val _regAltName: String = regAltName
@@ -19,6 +21,8 @@ class Register(regName: String, regAltName: String, regData: Long = 0) {
                 _regValue = value
                 if (_regValue > maxValue){
                     _regValue %= maxValue
+                } else if(_regValue < minValue){
+                    _regValue = maxValue - abs(_regValue)
                 }
             }
         }
