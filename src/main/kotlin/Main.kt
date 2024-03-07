@@ -1,10 +1,18 @@
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.material.MaterialTheme
+import androidx.compose.runtime.*
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowPlacement
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
+import design.Page
 import design.pages.CodePage
+import design.pages.LoadingPage
+import kotlinx.coroutines.delay
 import registers.Register
 
 
@@ -15,6 +23,7 @@ fun main() = application {
         state = rememberWindowState(placement = WindowPlacement.Maximized),
         icon = painterResource("icons/riscambler-logo-riscer.svg")
     ) {
+        var currentPage by remember { mutableStateOf(Page.LOADING_SCREEN) }
         val registers = listOf(
             Register(regName = "x0", regAltName = "zero"),
             Register(regName = "x1", regAltName = "ra"),
@@ -50,7 +59,22 @@ fun main() = application {
             Register(regName = "x31", regAltName = "t6"),
         )
         MaterialTheme {
-            CodePage(registers)
+            AnimatedVisibility(
+                currentPage == Page.LOADING_SCREEN,
+                enter = fadeIn(),
+                exit = fadeOut(animationSpec = tween(1500))
+            ) {
+                LoadingPage()
+            }
+            AnimatedVisibility(
+                currentPage == Page.CODE_PAGE, enter = fadeIn(animationSpec = tween(1500)), exit = fadeOut()
+            ) { CodePage(registers) }
+
+        }
+        LaunchedEffect(key1 = true) {
+            delay(1000)
+            currentPage = Page.CODE_PAGE
         }
     }
+
 }
