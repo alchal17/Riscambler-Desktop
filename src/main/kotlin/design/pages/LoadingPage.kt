@@ -14,12 +14,12 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun LoadingPage() {
-    Box(modifier = Modifier.fillMaxSize().background(color = Color.LightGray), contentAlignment = Alignment.Center) {
+    Box(modifier = Modifier.fillMaxSize().background(color = Color(red = 56, green = 71, blue = 80)), contentAlignment = Alignment.Center) {
         Icon(
             painter = painterResource("icons/riscambler-logo-riscer.svg"),
             contentDescription = null,
             tint = Color.Unspecified,
-            modifier = Modifier.fillMaxSize().padding(10.dp)
+            modifier = Modifier.fillMaxSize(0.75f).padding(10.dp)
         )
     }
 }
