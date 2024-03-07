@@ -13,7 +13,7 @@ fun main() = application {
         title = "Riscambler",
         onCloseRequest = ::exitApplication,
         state = rememberWindowState(placement = WindowPlacement.Maximized),
-        icon = painterResource("icons/riscambler-logo-01.svg")
+        icon = painterResource("icons/riscambler-logo-riscer.svg")
     ) {
         val registers = listOf(
             Register(regName = "x0", regAltName = "zero"),
