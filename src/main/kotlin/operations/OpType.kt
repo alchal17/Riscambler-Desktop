@@ -15,7 +15,7 @@ sealed class OpType(
         data object ADD : ArithmeticOps("ADD", OperationImplementations::ADD)       // Add
         data object ADDI : ArithmeticOps("ADDI", OperationImplementations::ADDI)    // Subtracts
         data object SUB : ArithmeticOps("SUB", OperationImplementations::SUB)       // Add immediate
-        data object SLT : ArithmeticOps("SLT")                                      // Set less than
+        data object SLT : ArithmeticOps("SLT", OperationImplementations::SLT)       // Set less than
         data object SLTI : ArithmeticOps("SLTI")                                    // Set less than immediate
         data object SLTU : ArithmeticOps("SLTU")                                    // Set less than unsigned
         data object SLTIU : ArithmeticOps("SLTIU")                                  // Set less than immediate unsigned
