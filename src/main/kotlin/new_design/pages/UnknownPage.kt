@@ -1,8 +1,9 @@
-package new_design.components
+package new_design.pages
 
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 
 @Composable
-fun LeftSectionCodePage(){
+fun UnknownPage() {
+    Text("Unknown Page")
 }
