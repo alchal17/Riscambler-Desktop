@@ -18,10 +18,8 @@ import androidx.compose.ui.graphics.drawscope.withTransform
 import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.graphics.rotate
 import androidx.compose.ui.graphics.toArgb
-import androidx.compose.ui.text.TextLayoutResult
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.drawText
-import androidx.compose.ui.text.rememberTextMeasurer
+import androidx.compose.ui.text.*
+import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.dp
 import width
 
@@ -45,27 +43,44 @@ fun ProcessorComponent() {
             )
             //draws on top
             repeat(numberOfRegistersOnSide) {
-                drawRect(
-                    color = Color.White,
-                    size = Size(squareSide / (numberOfRegistersOnSide * 2 + 1), squareSide / 4),
-                    topLeft = Offset((size.width - squareSide) / 2 + tempOffsetX, squareSide / 4f)
-                )
+                drawIntoCanvas { canvas ->
+                    canvas.save()
+                    canvas.translate((size.width - squareSide) / 2 + tempOffsetX, squareSide / 4f)
+                    drawRect(
+                        color = Color.White,
+                        size = Size(squareSide / (numberOfRegistersOnSide * 2 + 1), squareSide / 4),
+                    )
+                    canvas.rotate(90f)
+                    drawText(
+                        textMeasurer = textMeasurer, "AAAA", topLeft = Offset(
+                            squareSide / 4 - textMeasurer.measure("AAAA").size.width.toFloat() - 2f,
+                            (squareSide / (numberOfRegistersOnSide * 2 + 1) - textMeasurer.measure("AAAA").size.height.toFloat()) / 2 - initOffset
+                        )
+                    )
+                    canvas.restore()
+                }
+
                 tempOffsetX += initOffset * 2
             }
             //draws on right
             repeat(numberOfRegistersOnSide) {
-                drawRect(
-                    color = Color.White,
-                    size = Size(squareSide / 4, squareSide / (numberOfRegistersOnSide * 2 + 1)),
-                    topLeft = Offset(
+                drawIntoCanvas { canvas ->
+                    canvas.save()
+                    canvas.translate(
                         (size.width - squareSide) / 2 + squareSide, (size.height - squareSide) / 2 + tempOffsetY
                     )
-                )
-                drawText(
-                    textMeasurer = textMeasurer, "AAAA", topLeft = Offset(
-                        (size.width - squareSide) / 2 + squareSide, (size.height - squareSide) / 2 + tempOffsetY
+                    drawRect(
+                        color = Color.White,
+                        size = Size(squareSide / 4, squareSide / (numberOfRegistersOnSide * 2 + 1)),
                     )
-                )
+                    drawText(
+                        textMeasurer = textMeasurer, "AAAA", topLeft = Offset(
+                            2f,
+                            (squareSide / (numberOfRegistersOnSide * 2 + 1) - textMeasurer.measure("AAAA").size.height.toFloat()) / 2
+                        )
+                    )
+                    canvas.restore()
+                }
                 tempOffsetY += initOffset * 2
             }
             //draws on bottom
@@ -86,24 +101,36 @@ fun ProcessorComponent() {
                     )
                     canvas.rotate(90f)
                     drawText(
-                        textMeasurer = textMeasurer, "AAAA"
+                        textMeasurer = textMeasurer, "AAAA", topLeft = Offset(
+                            2f,
+                            (squareSide / (numberOfRegistersOnSide * 2 + 1) - textMeasurer.measure("AAAA").size.height.toFloat()) / 2
+                        )
                     )
                     canvas.restore()
                 }
-
-
-
                 tempOffsetX -= initOffset * 2
             }
+
             //draw on left
             repeat(numberOfRegistersOnSide) {
-                drawRect(
-                    color = Color.White,
-                    size = Size(squareSide / 4, squareSide / (numberOfRegistersOnSide * 2 + 1)),
-                    topLeft = Offset(
-                        (size.width - squareSide) / 4, (size.height - squareSide) / 2 + tempOffsetY - initOffset * 2
+                drawIntoCanvas { canvas ->
+                    canvas.save()
+                    canvas.translate(
+                        (size.width - squareSide) / 2 - squareSide / 4,
+                        (size.height - squareSide) / 2 + tempOffsetY - initOffset * 2,
                     )
-                )
+                    drawRect(
+                        color = Color.White,
+                        size = Size(squareSide / 4, squareSide / (numberOfRegistersOnSide * 2 + 1)),
+                    )
+                    drawText(
+                        textMeasurer = textMeasurer, "AAAA", topLeft = Offset(
+                            squareSide / 4 - textMeasurer.measure("AAAA").size.width.toFloat() - 2f,
+                            (squareSide / (numberOfRegistersOnSide * 2 + 1) - textMeasurer.measure("AAAA").size.height.toFloat()) / 2
+                        )
+                    )
+                    canvas.restore()
+                }
                 tempOffsetY -= initOffset * 2
             }
         }
