@@ -31,6 +31,8 @@ fun ProcessorComponent() {
     var tempOffsetX = initOffset
     var tempOffsetY = initOffset
     val textMeasurer = rememberTextMeasurer()
+    val registerHeight = squareSide / 4f
+    val registerWidth = squareSide / (numberOfRegistersOnSide * 2 + 1)
     Box(
         modifier = Modifier.size((width * 0.4).dp), contentAlignment = Alignment.Center
     ) {
@@ -45,16 +47,16 @@ fun ProcessorComponent() {
             repeat(numberOfRegistersOnSide) {
                 drawIntoCanvas { canvas ->
                     canvas.save()
-                    canvas.translate((size.width - squareSide) / 2 + tempOffsetX, squareSide / 4f)
+                    canvas.translate((size.width - squareSide) / 2 + tempOffsetX, registerHeight)
                     drawRect(
                         color = Color.White,
-                        size = Size(squareSide / (numberOfRegistersOnSide * 2 + 1), squareSide / 4),
+                        size = Size(registerWidth, registerHeight),
                     )
                     canvas.rotate(90f)
                     drawText(
                         textMeasurer = textMeasurer, "AAAA", topLeft = Offset(
-                            squareSide / 4 - textMeasurer.measure("AAAA").size.width.toFloat() - 2f,
-                            (squareSide / (numberOfRegistersOnSide * 2 + 1) - textMeasurer.measure("AAAA").size.height.toFloat()) / 2 - initOffset
+                            registerHeight - textMeasurer.measure("AAAA").size.width.toFloat() - 2f,
+                            (registerWidth - textMeasurer.measure("AAAA").size.height.toFloat()) / 2 - initOffset
                         )
                     )
                     canvas.restore()
@@ -62,6 +64,7 @@ fun ProcessorComponent() {
 
                 tempOffsetX += initOffset * 2
             }
+
             //draws on right
             repeat(numberOfRegistersOnSide) {
                 drawIntoCanvas { canvas ->
@@ -71,12 +74,12 @@ fun ProcessorComponent() {
                     )
                     drawRect(
                         color = Color.White,
-                        size = Size(squareSide / 4, squareSide / (numberOfRegistersOnSide * 2 + 1)),
+                        size = Size(registerHeight, registerWidth),
                     )
                     drawText(
                         textMeasurer = textMeasurer, "AAAA", topLeft = Offset(
                             2f,
-                            (squareSide / (numberOfRegistersOnSide * 2 + 1) - textMeasurer.measure("AAAA").size.height.toFloat()) / 2
+                            (registerWidth - textMeasurer.measure("AAAA").size.height.toFloat()) / 2
                         )
                     )
                     canvas.restore()
@@ -88,7 +91,7 @@ fun ProcessorComponent() {
                 drawIntoCanvas { canvas ->
                     drawRect(
                         color = Color.White,
-                        size = Size(squareSide / (numberOfRegistersOnSide * 2 + 1), squareSide / 4),
+                        size = Size(registerWidth, registerHeight),
                         topLeft = Offset(
                             (size.width - squareSide) / 2 - tempOffsetX + initOffset + squareSide,
                             (size.height - squareSide) / 2 + squareSide
@@ -103,7 +106,7 @@ fun ProcessorComponent() {
                     drawText(
                         textMeasurer = textMeasurer, "AAAA", topLeft = Offset(
                             2f,
-                            (squareSide / (numberOfRegistersOnSide * 2 + 1) - textMeasurer.measure("AAAA").size.height.toFloat()) / 2
+                            (registerWidth - textMeasurer.measure("AAAA").size.height.toFloat()) / 2
                         )
                     )
                     canvas.restore()
@@ -121,12 +124,12 @@ fun ProcessorComponent() {
                     )
                     drawRect(
                         color = Color.White,
-                        size = Size(squareSide / 4, squareSide / (numberOfRegistersOnSide * 2 + 1)),
+                        size = Size(registerHeight, registerWidth),
                     )
                     drawText(
                         textMeasurer = textMeasurer, "AAAA", topLeft = Offset(
-                            squareSide / 4 - textMeasurer.measure("AAAA").size.width.toFloat() - 2f,
-                            (squareSide / (numberOfRegistersOnSide * 2 + 1) - textMeasurer.measure("AAAA").size.height.toFloat()) / 2
+                            registerHeight - textMeasurer.measure("AAAA").size.width.toFloat() - 2f,
+                            (registerWidth - textMeasurer.measure("AAAA").size.height.toFloat()) / 2
                         )
                     )
                     canvas.restore()
