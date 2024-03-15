@@ -58,7 +58,7 @@ sealed class OpType(
         data object SRAI : LogicalOps("SRAI")           // Shift right arithmetic immediate
     }
 
-    sealed class BranchingOps (
+    sealed class BranchingOps(
         name: String,
         function: ((List<String>, SnapshotStateList<Register>, Int) -> Status)? = null
     ) : OpType(name, function) {
