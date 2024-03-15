@@ -76,7 +76,7 @@ fun main() = application {
                 }
                 AnimatedVisibility(
                     currentPage == Page.CODE_PAGE, enter = fadeIn(animationSpec = tween(1500)), exit = fadeOut()
-                ) { RedesignedCodePage() }
+                ) { RedesignedCodePage(registers) }
 
             }
         }
