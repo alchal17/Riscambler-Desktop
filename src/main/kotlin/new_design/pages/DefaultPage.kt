@@ -36,7 +36,7 @@ fun DefaultPage(code: MutableState<String>, registers: SnapshotStateList<Registe
 
     Row(modifier = Modifier.fillMaxSize()) {
         Box(
-            modifier = Modifier.weight(1f).fillMaxHeight(), contentAlignment = Alignment.BottomEnd
+            modifier = Modifier.weight(1f).fillMaxHeight(), contentAlignment = Alignment.Center
         ) {
             CustomTextField(code,
                 {
