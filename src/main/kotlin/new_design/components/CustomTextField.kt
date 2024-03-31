@@ -19,7 +19,7 @@ import width
 @Composable
 fun CustomTextField(code: MutableState<String>, vararg icons: @Composable () -> Unit) {
     Box(modifier = Modifier.background(color = Color.LightGray)) {
-        Column(modifier = Modifier.fillMaxHeight(0.75f).fillMaxWidth(0.5f).padding((height / 150).dp), horizontalAlignment = Alignment.CenterHorizontally) {
+        Column(modifier = Modifier.fillMaxSize().padding((height / 150).dp), horizontalAlignment = Alignment.CenterHorizontally) {
             TextField(
                 value = code.value,
                 onValueChange = { code.value = it },

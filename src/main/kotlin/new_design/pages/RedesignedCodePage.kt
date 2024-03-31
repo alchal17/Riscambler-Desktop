@@ -21,7 +21,7 @@ fun RedesignedCodePage(registers: List<Register>) {
     var registerState by remember { mutableStateOf(registers.toMutableStateList()) }
     val code = remember { mutableStateOf("") }
     Scaffold(
-        bottomBar = { Box(modifier = Modifier.padding(top = (height / 30).dp)) { ButtonsBar(currentPage) } },
+        bottomBar = { Box(modifier = Modifier) { ButtonsBar(currentPage) } },
         backgroundColor = Color(red = 56, green = 71, blue = 80),
         modifier = Modifier.fillMaxSize()
     ) {

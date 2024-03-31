@@ -3,20 +3,15 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.lightColors
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.window.Window
-import androidx.compose.ui.window.WindowPlacement
-import androidx.compose.ui.window.application
-import androidx.compose.ui.window.rememberWindowState
+import androidx.compose.ui.window.*
 import design.Page
-import design.pages.CodePage
-import design.pages.LoadingPage
+import new_design.pages.LoadingPage
 import kotlinx.coroutines.delay
 import new_design.pages.RedesignedCodePage
 import registers.Register
@@ -28,6 +23,7 @@ fun main() = application {
         onCloseRequest = ::exitApplication,
         state = rememberWindowState(placement = WindowPlacement.Maximized),
         icon = painterResource("icons/riscambler-logo-riscer.svg"),
+        resizable = false,
     ) {
         var initialAnimationState by remember { mutableStateOf(false) }
         var currentPage by remember { mutableStateOf(Page.LOADING_SCREEN) }

@@ -1,4 +1,4 @@
-package design.pages
+package new_design.pages
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
