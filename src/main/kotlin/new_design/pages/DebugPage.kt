@@ -3,7 +3,6 @@ package new_design.pages
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
@@ -12,7 +11,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import height
-import new_design.components.CustomTextField
+import new_design.components.text_fields.CustomTextField
+import new_design.components.text_fields.DebugModeTextField
+import new_design.components.text_fields.ExplainModeTextField
 
 @Composable
 fun DebugPage(code: MutableState<String>) {
@@ -41,6 +42,10 @@ fun DebugPage(code: MutableState<String>) {
                 )
             }
         }
-        Box(modifier = Modifier.weight(1f)) {}
+        Box(modifier = Modifier.weight(1f)) {
+            Box(modifier = Modifier.padding((height / 80).dp)) {
+                DebugModeTextField(code.value)
+            }
+        }
     }
 }

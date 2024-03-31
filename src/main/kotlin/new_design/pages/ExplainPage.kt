@@ -11,7 +11,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import height
-import new_design.components.CustomTextField
+import new_design.components.text_fields.CustomTextField
+import new_design.components.text_fields.ExplainModeTextField
 
 @Composable
 fun ExplainPage(code: MutableState<String>) {
@@ -36,6 +37,10 @@ fun ExplainPage(code: MutableState<String>) {
                 )
             }
         }
-        Box(modifier = Modifier.weight(1f)) {}
+        Box(modifier = Modifier.weight(1f)) {
+            Box(modifier = Modifier.padding((height / 80).dp)) {
+                ExplainModeTextField(code.value)
+            }
+        }
     }
 }
