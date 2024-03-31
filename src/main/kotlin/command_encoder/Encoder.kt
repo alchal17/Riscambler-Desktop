@@ -1,21 +1,25 @@
 package command_encoder
 
 import commandNamesFormatMap
+import funct7Map
+import funct3Map
 
-class Encoder {
-    fun parseCodeLine(codeline: String): List<String> {
-        return codeline.replace(",", "").split(" ")
-    }
 
-    fun getOpcode(commandName: String): UInt {
-        return commandNamesFormatMap[commandName]?.opcode ?: throw Exception("Command not found")
-    }
+fun splitLine(codeLine: String): List<String> {
+    return (codeLine.trim().replace(",", "")).split(" ");
+}
 
-    fun encodeRegisters(regs: List<String>): List<UInt> {
-        val encodedRegs: MutableList<UInt> = List(regs.size) { 0u }.toMutableList()
-        for (i in 0..regs.size) {
-            encodedRegs[i] = "0b${regs[i].slice(1..regs[i].length).toUInt().toString(2).padStart(5, '0')}u".toUInt()
-        }
-        return encodedRegs
+fun encodeName(commandName: String): String {
+    return funct7Map[commandName] + funct3Map[commandName] + (commandNamesFormatMap[commandName]?.opcode
+        ?: "Command not found")
+}
+
+fun encodeRegs(regs: List<String>): List<String> {
+    val encodedRegs = mutableListOf<String>()
+    for (reg in regs) {
+        val encodedReg = Integer.toBinaryString(reg.substring(1).toInt())
+        val paddedReg = "0".repeat(5 - encodedReg.length) + encodedReg
+        encodedRegs.add(paddedReg.reversed())
     }
+    return encodedRegs
 }
