@@ -43,7 +43,7 @@ fun ReadingPage() {
             }
         }
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-            if (currentPage > 0) {
+            if (pagerState.canScrollBackward) {
                 Button(onClick = {
                     currentPage--
                     coroutineScope.launch {
@@ -53,7 +53,7 @@ fun ReadingPage() {
             } else {
                 Box {}
             }
-            if (currentPage < sectionContents.size - 1) {
+            if (pagerState.canScrollForward) {
                 Button(onClick = {
                     currentPage++
                     coroutineScope.launch {
