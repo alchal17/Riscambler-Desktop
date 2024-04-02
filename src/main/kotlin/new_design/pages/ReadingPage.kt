@@ -25,19 +25,20 @@ import width
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ReadingPage() {
-    val sectionContents = listOf<@Composable () -> Unit>({ Text("Section1") }, { Text("Section2") })
+    val sectionContents = listOf<@Composable () -> Unit>({ Text("Section1") },
+        { Text("Section2") },
+        { Box(modifier = Modifier.fillMaxSize().background(color = Color.Red)) })
     val pagerState = rememberPagerState(pageCount = { sectionContents.size })
     val coroutineScope = rememberCoroutineScope()
-    var currentPage by remember { mutableStateOf(0) }
     Column {
-        HorizontalPager(modifier = Modifier.fillMaxWidth().weight(1f), state = pagerState) {
+        HorizontalPager(modifier = Modifier.fillMaxWidth().weight(1f), state = pagerState) {page ->
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                 Box(
                     modifier = Modifier.width((width * 0.75f).dp).fillMaxHeight(0.75f).clip(RoundedCornerShape(20))
                         .background(color = Color(39, 58, 70)), contentAlignment = Alignment.Center
                 ) {
                     Box(modifier = Modifier.padding(horizontal = (width / 20).dp, vertical = (height / 20).dp)) {
-                        sectionContents[currentPage]()
+                        sectionContents[page]()
                     }
                 }
             }
@@ -45,9 +46,8 @@ fun ReadingPage() {
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
             if (pagerState.canScrollBackward) {
                 Button(onClick = {
-                    currentPage--
                     coroutineScope.launch {
-                        pagerState.animateScrollToPage(currentPage)
+                        pagerState.animateScrollToPage(pagerState.currentPage - 1)
                     }
                 }) { Text("Previous") }
             } else {
@@ -55,9 +55,8 @@ fun ReadingPage() {
             }
             if (pagerState.canScrollForward) {
                 Button(onClick = {
-                    currentPage++
                     coroutineScope.launch {
-                        pagerState.animateScrollToPage(currentPage)
+                        pagerState.animateScrollToPage(pagerState.currentPage + 1)
                     }
 
                 }) { Text("Next") }
