@@ -16,6 +16,7 @@ import androidx.compose.ui.zIndex
 import height
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import new_design.components.Analyzer
 import new_design.components.text_fields.CustomTextField
 import new_design.components.ProcessorComponent
 import new_design.components.RegisterInfo
@@ -82,5 +83,4 @@ fun DefaultPage(code: MutableState<String>, registers: SnapshotStateList<Registe
             }
         }
     }
-
 }

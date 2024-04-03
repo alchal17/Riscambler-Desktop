@@ -31,7 +31,7 @@ fun ReadingPage() {
     val pagerState = rememberPagerState(pageCount = { sectionContents.size })
     val coroutineScope = rememberCoroutineScope()
     Column {
-        HorizontalPager(modifier = Modifier.fillMaxWidth().weight(1f), state = pagerState) {page ->
+        HorizontalPager(modifier = Modifier.fillMaxWidth().weight(1f), state = pagerState) { page ->
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                 Box(
                     modifier = Modifier.width((width * 0.75f).dp).fillMaxHeight(0.75f).clip(RoundedCornerShape(20))
