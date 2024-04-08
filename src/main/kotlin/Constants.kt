@@ -65,13 +65,13 @@ val operationsR = mapOf(
     "01000000000110011" to OperationImplementations::SUB,
 
     "00000000100110011" to OperationImplementations::SLT,
-//    "00000000110110011" to OperationImplementations::SLTU,
-//
-//    "00000001110110011" to OperationImplementations::AND,
-//    "00000001100110011" to OperationImplementations::OR,
-//    "00000001000110011" to OperationImplementations::XOR,
-//
-//    "00000000010110011" to OperationImplementations::SLL,
-//    "00000001010110011" to OperationImplementations::SRL,
-//    "01000001010110011" to OperationImplementations::SRA,
+    "00000000110110011" to OperationImplementations::SLTU,
+
+    "00000001110110011" to OperationImplementations::AND,
+    "00000001100110011" to OperationImplementations::OR,
+    "00000001000110011" to OperationImplementations::XOR,
+
+    "00000000010110011" to OperationImplementations::SLL,
+    "00000001010110011" to OperationImplementations::SRL,
+    "01000001010110011" to OperationImplementations::SRA,
 )
