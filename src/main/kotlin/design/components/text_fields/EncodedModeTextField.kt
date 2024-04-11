@@ -1,8 +1,7 @@
-package new_design.components.text_fields
+package design.components.text_fields
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
@@ -12,18 +11,18 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import height
-import width
+import screenHeight
+import screenWidth
 
 @Composable
-fun ExplainModeTextField(explanation: String) {
-    Box(modifier = Modifier.background(color = Color(0, 255, 87))) {
+fun EncodedModeTextField(result: String) {
+    Box(modifier = Modifier.background(color = Color.Yellow)) {
         Column(
-            modifier = Modifier.fillMaxSize().padding((height / 150).dp),
+            modifier = Modifier.fillMaxSize().padding((screenHeight / 150).dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             TextField(
-                value = explanation,
+                value = result,
                 onValueChange = { },
                 modifier = Modifier.fillMaxWidth().weight(10f),
                 colors = TextFieldDefaults.textFieldColors(
@@ -33,7 +32,7 @@ fun ExplainModeTextField(explanation: String) {
                     focusedIndicatorColor = Color.Transparent,
                     unfocusedIndicatorColor = Color.Transparent,
                     disabledIndicatorColor = Color.Transparent
-                ), textStyle = TextStyle(fontSize = ((height + width) / 100).sp)
+                ), textStyle = TextStyle(fontSize = ((screenHeight + screenWidth) / 100).sp)
             )
         }
     }

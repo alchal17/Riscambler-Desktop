@@ -1,4 +1,4 @@
-package new_design.components.text_fields
+package design.components.text_fields
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -12,16 +12,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import height
-import width
+import screenHeight
+import screenWidth
 
 @Composable
-fun CustomTextField(code: MutableState<String>, vararg icons: @Composable () -> Unit) {
+fun CustomTextField(code: MutableState<String>, vararg icons: @Composable () -> Unit, onTextChange: (String) -> Unit) {
     Box(modifier = Modifier.background(color = Color.LightGray)) {
-        Column(modifier = Modifier.fillMaxSize().padding((height / 150).dp), horizontalAlignment = Alignment.CenterHorizontally) {
+        Column(modifier = Modifier.fillMaxSize().padding((screenHeight / 150).dp), horizontalAlignment = Alignment.CenterHorizontally) {
             TextField(
                 value = code.value,
-                onValueChange = { code.value = it },
+                onValueChange = onTextChange,
                 modifier = Modifier.fillMaxWidth().weight(10f),
                 colors = TextFieldDefaults.textFieldColors(
                     textColor = Color.Black,
@@ -30,7 +30,7 @@ fun CustomTextField(code: MutableState<String>, vararg icons: @Composable () -> 
                     focusedIndicatorColor = Color.Transparent,
                     unfocusedIndicatorColor = Color.Transparent,
                     disabledIndicatorColor = Color.Transparent
-                ), textStyle = TextStyle(fontSize = ((height + width)/100).sp)
+                ), textStyle = TextStyle(fontSize = ((screenHeight + screenWidth)/100).sp)
             )
             Row(
                 modifier = Modifier.fillMaxWidth(0.8f).padding(top = 5.dp),

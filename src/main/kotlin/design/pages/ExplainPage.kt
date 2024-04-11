@@ -1,4 +1,4 @@
-package new_design.pages
+package design.pages
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -10,41 +10,38 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import height
-import new_design.components.text_fields.CustomTextField
-import new_design.components.text_fields.DebugModeTextField
-import new_design.components.text_fields.ExplainModeTextField
+import androidx.compose.ui.zIndex
+import screenHeight
+import design.components.text_fields.CustomTextField
+import design.components.text_fields.ExplainModeTextField
 
 @Composable
-fun DebugPage(code: MutableState<String>) {
-    Row(modifier = Modifier.fillMaxSize()) {
+fun ExplainPage(code: MutableState<String>) {
+    Row(modifier = Modifier.fillMaxSize().zIndex(1f)) {
         Box(
-            modifier = Modifier.weight(1f).fillMaxHeight(),
-            contentAlignment = Alignment.Center
+            modifier = Modifier.weight(1f).fillMaxHeight(), contentAlignment = Alignment.Center
         ) {
-            Box(modifier = Modifier.padding((height / 80).dp)) {
-                CustomTextField(
-                    code,
+            Box(modifier = Modifier.padding((screenHeight / 80).dp)) {
+                CustomTextField(code,
                     {
-                        Icon(
-                            painter = painterResource("/icons/clean_field_button.svg"),
+                        Icon(painter = painterResource("/icons/clean_field_button.svg"),
                             contentDescription = null,
                             tint = Color.Unspecified,
                             modifier = Modifier.clickable { code.value = "" })
-                    },
-                    {
+                    }, {
                         Icon(
-                            painter = painterResource("/icons/debug_button.svg"),
+                            painter = painterResource("/icons/run_button.svg"),
                             contentDescription = null,
                             tint = Color.Unspecified
                         )
-                    }
+                    },
+                    onTextChange = { code.value = it }
                 )
             }
         }
         Box(modifier = Modifier.weight(1f)) {
-            Box(modifier = Modifier.padding((height / 80).dp)) {
-                DebugModeTextField(code.value)
+            Box(modifier = Modifier.padding((screenHeight / 80).dp)) {
+                ExplainModeTextField(code.value)
             }
         }
     }

@@ -41,6 +41,7 @@ class OperationImplementations {
                 val secondRegIndex = argumentsContainer.param2.toInt()
                 val int = argumentsContainer.param3.toInt()
                 registers[firstRegIndex].regValue = registers[secondRegIndex].regValue + int
+                println("22222222222222222222222222222222222222222222222222222")
             }
             return status
         }
@@ -113,9 +114,10 @@ class OperationImplementations {
                 val firstRegIndex = argumentsContainer.param1.toInt()
                 val secondRegIndex = argumentsContainer.param2.toInt()
                 val thirdRegIndex = argumentsContainer.param3.toInt()
-
                 registers[firstRegIndex].regValue =
                     registers[secondRegIndex].regValue and registers[thirdRegIndex].regValue
+                println("!111111111111111111111111111111111111111111111111111111111111111111")
+                println(registers[firstRegIndex].regValue)
             }
             return status
         }

@@ -2,8 +2,8 @@ import constants_enums.ISACommandType
 import operations.OperationImplementations
 import java.awt.Toolkit
 
-val height = Toolkit.getDefaultToolkit().screenSize.height
-val width = Toolkit.getDefaultToolkit().screenSize.width
+val screenHeight = Toolkit.getDefaultToolkit().screenSize.height
+val screenWidth = Toolkit.getDefaultToolkit().screenSize.width
 
 val commandNamesFormatMap = mapOf(
     "ADD" to ISACommandType.R,

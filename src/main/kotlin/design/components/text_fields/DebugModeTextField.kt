@@ -1,4 +1,4 @@
-package new_design.components.text_fields
+package design.components.text_fields
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -11,14 +11,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import height
-import width
+import screenHeight
+import screenWidth
 
 @Composable
 fun DebugModeTextField(result: String){
     Box(modifier = Modifier.background(color = Color(255, 0, 0))) {
         Column(
-            modifier = Modifier.fillMaxSize().padding((height / 150).dp),
+            modifier = Modifier.fillMaxSize().padding((screenHeight / 150).dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             TextField(
@@ -32,7 +32,7 @@ fun DebugModeTextField(result: String){
                     focusedIndicatorColor = Color.Transparent,
                     unfocusedIndicatorColor = Color.Transparent,
                     disabledIndicatorColor = Color.Transparent
-                ), textStyle = TextStyle(fontSize = ((height + width) / 100).sp)
+                ), textStyle = TextStyle(fontSize = ((screenHeight + screenWidth) / 100).sp)
             )
         }
     }

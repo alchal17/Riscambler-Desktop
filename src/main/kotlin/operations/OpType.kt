@@ -44,7 +44,7 @@ sealed class OpType(
         name: String,
         function: ((List<String>, SnapshotStateList<Register>, Int) -> Status)? = null
     ) : OpType(name, function) {
-        data object AND : LogicalOps("AND")             // AND
+        data object AND : LogicalOps("AND", OperationImplementations::AND)             // AND
         data object OR : LogicalOps("OR")               // OR
         data object XOR : LogicalOps("XOR")             // XOR
         data object ANDI : LogicalOps("ANDI")           // AND immediate

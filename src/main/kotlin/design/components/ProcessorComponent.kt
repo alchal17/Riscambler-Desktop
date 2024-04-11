@@ -1,4 +1,4 @@
-package new_design.components
+package design.components
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,10 +11,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.drawscope.DrawStyle
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.input.pointer.pointerMoveFilter
 import androidx.compose.ui.res.painterResource
@@ -22,7 +24,6 @@ import androidx.compose.ui.text.drawText
 import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.unit.dp
 import registers.Register
-import width
 
 private data class RegisterRectangle(val register: Register, val offset: Offset, val size: Size)
 
@@ -97,9 +98,10 @@ fun ProcessorComponent(
     registers: SnapshotStateList<Register>,
     animatedColor: Color,
     currentElement: MutableState<Register>,
-    isRegisterHovered: MutableState<Boolean>
+    isRegisterHovered: MutableState<Boolean>,
+    windowHeight: Int, windowWidth: Int
 ) {
-    val squareSide = width * 0.2f
+    val squareSide = windowWidth * 0.2f
     val numberOfRegistersOnSide = 8
     val initOffset: Float = (squareSide / (numberOfRegistersOnSide * 2 + 1))
     var tempOffsetX = initOffset
@@ -107,7 +109,7 @@ fun ProcessorComponent(
     val textMeasurer = rememberTextMeasurer()
     val registerHeight = squareSide / 2.5f
     val registerWidth = squareSide / (numberOfRegistersOnSide * 2 + 1)
-    val sizeCopy = Size(width = (width * 0.4).toFloat(), height = (width * 0.4).toFloat())
+    val sizeCopy = Size(width = (windowWidth * 0.4).toFloat(), height = (windowWidth * 0.4).toFloat())
     val registerRectangles = getRegisterRectangles(
         registers = registers, mainSquareSize = sizeCopy, squareSide = squareSide, numberOfRegistersOnSide = 8
     )
@@ -115,7 +117,7 @@ fun ProcessorComponent(
 
 
     Box(
-        modifier = Modifier.size((width * 0.4).dp).pointerMoveFilter(onMove = { offset ->
+        modifier = Modifier.size((windowWidth * 0.4).dp).pointerMoveFilter(onMove = { offset ->
             searchResult = registerRectangles.find { isRegisterHovered(it, offset) }?.register
             if (searchResult != null) {
                 isRegisterHovered.value = true

@@ -5,15 +5,19 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.window.*
-import design.Page
-import new_design.pages.LoadingPage
+import androidx.compose.ui.window.Window
+import androidx.compose.ui.window.WindowPlacement
+import androidx.compose.ui.window.application
+import androidx.compose.ui.window.rememberWindowState
+import design.Screens
 import kotlinx.coroutines.delay
-import new_design.pages.RedesignedCodePage
+import design.pages.LoadingPage
+import design.pages.MainPage
+import design.pages.Pages
 import registers.Register
 
 
@@ -25,8 +29,10 @@ fun main() = application {
         icon = painterResource("icons/riscambler-logo-riscer.svg"),
         resizable = false,
     ) {
+        var windowHeight by remember { mutableStateOf(window.size.height) }
+        var windowWidth by remember { mutableStateOf(window.size.width) }
         var initialAnimationState by remember { mutableStateOf(false) }
-        var currentPage by remember { mutableStateOf(Page.LOADING_SCREEN) }
+        var currentPage by remember { mutableStateOf(Screens.LOADING_SCREEN) }
         val registers = listOf(
             Register(regName = "x0", regAltName = "zero"),
             Register(regName = "x1", regAltName = "ra"),
@@ -62,7 +68,12 @@ fun main() = application {
             Register(regName = "x31", regAltName = "t6"),
         )
         MaterialTheme {
-            Box(modifier = Modifier.fillMaxSize().background(color = Color(red = 56, green = 71, blue = 80))) {
+            Box(
+                modifier = Modifier.fillMaxSize().background(color = Color(red = 56, green = 71, blue = 80))
+                    .onSizeChanged { size ->
+                        windowHeight = size.height
+                        windowWidth = size.width
+                    }) {
                 AnimatedVisibility(
                     initialAnimationState,
                     enter = scaleIn(animationSpec = tween(1000)),
@@ -71,8 +82,8 @@ fun main() = application {
                     LoadingPage()
                 }
                 AnimatedVisibility(
-                    currentPage == Page.CODE_PAGE, enter = fadeIn(animationSpec = tween(1500)), exit = fadeOut()
-                ) { RedesignedCodePage(registers) }
+                    currentPage == Screens.CODE_SCREEN, enter = fadeIn(animationSpec = tween(1500)), exit = fadeOut()
+                ) { MainPage(registers, windowHeight, windowWidth) }
 
             }
         }
@@ -80,7 +91,7 @@ fun main() = application {
             initialAnimationState = true
             delay(2500)
             initialAnimationState = false
-            currentPage = Page.CODE_PAGE
+            currentPage = Screens.CODE_SCREEN
         }
     }
 
