@@ -5,12 +5,31 @@ import java.awt.Toolkit
 val screenHeight = Toolkit.getDefaultToolkit().screenSize.height
 val screenWidth = Toolkit.getDefaultToolkit().screenSize.width
 
+
+val memory: Array<Any?> = arrayOfNulls(Int.MAX_VALUE / 32)
+
+
 val commandNamesFormatMap = mapOf(
+    // R type command
     "ADD" to ISACommandType.R,
     "SUB" to ISACommandType.R,
     "SLT" to ISACommandType.R,
+
+    // I type command
     "ADDI" to ISACommandType.I,
-    "SLTI" to ISACommandType.I
+    "SLTI" to ISACommandType.I,
+
+    // S type command
+    "SB" to ISACommandType.S,
+
+    // SB type command
+    "BEQ" to ISACommandType.SB,
+
+    // U type command
+    "LUI" to ISACommandType.U,
+
+    // UJ type command
+    "UJ" to ISACommandType.UJ,
 )
 
 val funct7Map = mapOf(
