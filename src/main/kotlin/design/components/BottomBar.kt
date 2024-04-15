@@ -24,10 +24,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.platform.Font
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import design.WindowSize
 import design.pages.Pages
 
 @Composable
-fun BottomBar(pageState: MutableState<Pages>, windowHeight: Int, windowWidth: Int) {
+fun BottomBar(pageState: MutableState<Pages>) {
     val buttonValues = Pages.values().toList()
     Box(
         modifier = Modifier.fillMaxWidth().fillMaxHeight(1 / 14f)
@@ -44,7 +45,7 @@ fun BottomBar(pageState: MutableState<Pages>, windowHeight: Int, windowWidth: In
                 OutlinedButton(
                     onClick = { pageState.value = buttonValue },
                     border = BorderStroke(width = 2.dp, color = Color.Black),
-                    modifier = Modifier.width((windowWidth / (buttonValues.size + 1)).dp).fillMaxHeight(0.75f)
+                    modifier = Modifier.width((WindowSize.width / (buttonValues.size + 1)).dp).fillMaxHeight(0.75f)
                         .clip(shape = RoundedCornerShape(50))
                         .border(BorderStroke(width = 2.dp, color = Color.Black), shape = RoundedCornerShape(50))
                         .shadow(elevation = 4.dp, shape = RoundedCornerShape(50), clip = true),
@@ -57,7 +58,9 @@ fun BottomBar(pageState: MutableState<Pages>, windowHeight: Int, windowWidth: In
                     )
                 ) {
                     Text(
-                        buttonValue.pageName, fontSize = ((windowWidth + windowHeight) / 100).sp, style = TextStyle(
+                        buttonValue.pageName,
+                        fontSize = ((WindowSize.width + WindowSize.height) / 100).sp,
+                        style = TextStyle(
                             color = Color.White,
                             fontFamily = FontFamily(
                                 Font(

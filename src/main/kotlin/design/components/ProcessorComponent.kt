@@ -23,6 +23,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.drawText
 import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.unit.dp
+import design.WindowSize
 import registers.Register
 
 private data class RegisterRectangle(val register: Register, val offset: Offset, val size: Size)
@@ -99,9 +100,8 @@ fun ProcessorComponent(
     animatedColor: Color,
     currentElement: MutableState<Register>,
     isRegisterHovered: MutableState<Boolean>,
-    windowHeight: Int, windowWidth: Int
 ) {
-    val squareSide = windowWidth * 0.2f
+    val squareSide = WindowSize.width * 0.2f
     val numberOfRegistersOnSide = 8
     val initOffset: Float = (squareSide / (numberOfRegistersOnSide * 2 + 1))
     var tempOffsetX = initOffset
@@ -109,7 +109,7 @@ fun ProcessorComponent(
     val textMeasurer = rememberTextMeasurer()
     val registerHeight = squareSide / 2.5f
     val registerWidth = squareSide / (numberOfRegistersOnSide * 2 + 1)
-    val sizeCopy = Size(width = (windowWidth * 0.4).toFloat(), height = (windowWidth * 0.4).toFloat())
+    val sizeCopy = Size(width = (WindowSize.width * 0.4).toFloat(), height = (WindowSize.width * 0.4).toFloat())
     val registerRectangles = getRegisterRectangles(
         registers = registers, mainSquareSize = sizeCopy, squareSide = squareSide, numberOfRegistersOnSide = 8
     )
@@ -117,7 +117,7 @@ fun ProcessorComponent(
 
 
     Box(
-        modifier = Modifier.size((windowWidth * 0.4).dp).pointerMoveFilter(onMove = { offset ->
+        modifier = Modifier.size((WindowSize.width * 0.4).dp).pointerMoveFilter(onMove = { offset ->
             searchResult = registerRectangles.find { isRegisterHovered(it, offset) }?.register
             if (searchResult != null) {
                 isRegisterHovered.value = true
@@ -127,6 +127,7 @@ fun ProcessorComponent(
             }
             false
         }, onExit = {
+            isRegisterHovered.value = false
             false
         }), contentAlignment = Alignment.Center
     ) {

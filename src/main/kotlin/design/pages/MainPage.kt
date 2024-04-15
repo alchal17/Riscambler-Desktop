@@ -11,13 +11,12 @@ import design.components.BottomBar
 import registers.Register
 
 @Composable
-fun MainPage(registers: List<Register>, windowHeight: Int, windowWidth: Int) {
+fun MainPage() {
     val currentPage = remember { mutableStateOf(Pages.DEFAULT) }
-    var registerState by remember { mutableStateOf(registers.toMutableStateList()) }
     val code = remember { mutableStateOf("") }
     Scaffold(
         bottomBar = {
-            BottomBar(currentPage, windowHeight, windowWidth)
+            BottomBar(currentPage)
         },
         backgroundColor = Color(red = 56, green = 71, blue = 80),
         modifier = Modifier.fillMaxSize()
@@ -25,7 +24,7 @@ fun MainPage(registers: List<Register>, windowHeight: Int, windowWidth: Int) {
         Box(modifier = Modifier.padding(bottom = it.calculateBottomPadding(), top = it.calculateTopPadding())) {
             when (currentPage.value) {
                 Pages.DEFAULT -> {
-                    DefaultPage(code, registerState, windowHeight, windowWidth)
+                    DefaultPage(code)
                 }
 
                 Pages.EXPLAIN -> {
@@ -43,7 +42,6 @@ fun MainPage(registers: List<Register>, windowHeight: Int, windowWidth: Int) {
                 Pages.UNKNOWN -> {
                     EncodedPage(code)
                 }
-
             }
         }
     }

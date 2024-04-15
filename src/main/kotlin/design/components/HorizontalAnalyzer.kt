@@ -25,7 +25,7 @@ private enum class Section {
 fun HorizontalAnalyzer(warnings: List<String>, error: String) {
     val controlPanelWidth = screenWidth / 30
     var currentSection by remember { mutableStateOf(Section.WARNING) }
-    Row(modifier = Modifier.fillMaxWidth().fillMaxHeight(0.97f)) {
+    Row(modifier = Modifier.fillMaxWidth().fillMaxHeight(0.975f)) {
         Column(
             modifier = Modifier.fillMaxHeight().width(controlPanelWidth.dp).background(color = Color.LightGray),
             verticalArrangement = Arrangement.SpaceAround,
