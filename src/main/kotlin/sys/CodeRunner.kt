@@ -91,20 +91,20 @@ class CodeRunner {
         return ops
     }
 
-    private fun runLines(lineDataList: List<LineData>, registers: SnapshotStateList<Register>): Status {
-        var status: Status = Status.Success
+    private fun runLines(lineDataList: List<LineData>, registers: SnapshotStateList<Register>): EncodingStatus {
+        var encodingStatus: EncodingStatus = EncodingStatus.Success
         var operation: OpType
         lineDataList.forEachIndexed { index, lineData ->
             operation = operations.find { it.name == lineData.type.name }!!
             if (operation.commandFunction != null) {
-                status = operation.commandFunction?.invoke(lineData.operands, registers, index + 1)!!
+                encodingStatus = operation.commandFunction?.invoke(lineData.operands, registers, index + 1)!!
             }
-            if (status is Status.Error) return status
+            if (encodingStatus is EncodingStatus.Error) return encodingStatus
         }
-        return status
+        return encodingStatus
     }
 
-    fun runCode(codeString: String, registers: SnapshotStateList<Register>): Status {
+    fun runCode(codeString: String, registers: SnapshotStateList<Register>): EncodingStatus {
         val strippedLinesData = getLinesAsData(codeString)
         return runLines(strippedLinesData, registers)
     }

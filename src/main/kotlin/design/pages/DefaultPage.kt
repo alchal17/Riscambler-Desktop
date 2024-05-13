@@ -2,30 +2,25 @@ package design.pages
 
 import androidx.compose.animation.*
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Icon
-import androidx.compose.material.Text
 import androidx.compose.runtime.*
-import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.zIndex
 import design.WindowSize
 import design.components.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import design.components.text_fields.CustomTextField
-import registers.Register
 import registers.RegistersViewModel
 import sys.CodeRunner
-import sys.Status
+import sys.EncodingStatus
 
 private enum class Element {
     PROCESSOR, ANALYZER
@@ -93,7 +88,7 @@ fun DefaultPage(
                             modifier = Modifier.clickable {
                                 RegistersViewModel.nullifyRegisters()
                                 val status = codeRunner.runCode(code.value, RegistersViewModel.registers)
-                                error = if (status is Status.Error) {
+                                error = if (status is EncodingStatus.Error) {
                                     status.errorMessage
                                 } else {
                                     ""

@@ -4,23 +4,22 @@ import ExpressionParser
 import ThreeArgumentsContainer
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import registers.Register
-import sys.Status
-import memory
+import sys.EncodingStatus
 
 
 class OperationImplementations {
     companion object {
         private val expressionParser = ExpressionParser()
         //  R type commands
-        fun ADD(params: List<String>, registers: SnapshotStateList<Register>, line: Int): Status {
-            val pair: Pair<ThreeArgumentsContainer?, Status> = expressionParser.parseRegRegReg(
+        fun ADD(params: List<String>, registers: SnapshotStateList<Register>, line: Int): EncodingStatus {
+            val pair: Pair<ThreeArgumentsContainer?, EncodingStatus> = expressionParser.parseRegRegReg(
                 params = params,
                 registers = registers,
                 line = line
             )
             val status = pair.second
             val argumentsContainer = pair.first
-            if (status is Status.Success && argumentsContainer != null) {
+            if (status is EncodingStatus.Success && argumentsContainer != null) {
                 val firstRegIndex = argumentsContainer.param1.toInt()
                 val secondRegIndex = argumentsContainer.param2.toInt()
                 val thirdRegIndex = argumentsContainer.param3.toInt()
@@ -30,15 +29,15 @@ class OperationImplementations {
             return status
         }
 
-        fun SUB(params: List<String>, registers: SnapshotStateList<Register>, line: Int): Status {
-            val pair: Pair<ThreeArgumentsContainer?, Status> = expressionParser.parseRegRegReg(
+        fun SUB(params: List<String>, registers: SnapshotStateList<Register>, line: Int): EncodingStatus {
+            val pair: Pair<ThreeArgumentsContainer?, EncodingStatus> = expressionParser.parseRegRegReg(
                 params = params,
                 registers = registers,
                 line = line
             )
             val status = pair.second
             val argumentsContainer = pair.first
-            if (status is Status.Success && argumentsContainer != null) {
+            if (status is EncodingStatus.Success && argumentsContainer != null) {
                 val firstRegIndex = argumentsContainer.param1.toInt()
                 val secondRegIndex = argumentsContainer.param2.toInt()
                 val thirdRegIndex = argumentsContainer.param3.toInt()
@@ -48,15 +47,15 @@ class OperationImplementations {
             return status
         }
 
-        fun SLT(params: List<String>, registers: SnapshotStateList<Register>, line: Int): Status {
-            val pair: Pair<ThreeArgumentsContainer?, Status> = expressionParser.parseRegRegReg(
+        fun SLT(params: List<String>, registers: SnapshotStateList<Register>, line: Int): EncodingStatus {
+            val pair: Pair<ThreeArgumentsContainer?, EncodingStatus> = expressionParser.parseRegRegReg(
                 params = params,
                 registers = registers,
                 line = line
             )
             val status = pair.second
             val argumentsContainer = pair.first
-            if (status is Status.Success && argumentsContainer != null) {
+            if (status is EncodingStatus.Success && argumentsContainer != null) {
                 val firstRegIndex = argumentsContainer.param1.toInt()
                 val secondRegIndex = argumentsContainer.param2.toInt()
                 val thirdRegIndex = argumentsContainer.param3.toInt()
@@ -67,15 +66,15 @@ class OperationImplementations {
             return status
         }
 
-        fun SLTU(params: List<String>, registers: SnapshotStateList<Register>, line: Int): Status {
-            val pair: Pair<ThreeArgumentsContainer?, Status> = expressionParser.parseRegRegReg(
+        fun SLTU(params: List<String>, registers: SnapshotStateList<Register>, line: Int): EncodingStatus {
+            val pair: Pair<ThreeArgumentsContainer?, EncodingStatus> = expressionParser.parseRegRegReg(
                 params = params,
                 registers = registers,
                 line = line
             )
             val status = pair.second
             val argumentsContainer = pair.first
-            if (status is Status.Success && argumentsContainer != null) {
+            if (status is EncodingStatus.Success && argumentsContainer != null) {
                 val firstRegIndex = argumentsContainer.param1.toInt()
                 val secondRegIndex = argumentsContainer.param2.toInt()
                 val thirdRegIndex = argumentsContainer.param3.toInt()
@@ -86,15 +85,15 @@ class OperationImplementations {
             return status
         }
 
-        fun AND(params: List<String>, registers: SnapshotStateList<Register>, line: Int): Status {
-            val pair: Pair<ThreeArgumentsContainer?, Status> = expressionParser.parseRegRegReg(
+        fun AND(params: List<String>, registers: SnapshotStateList<Register>, line: Int): EncodingStatus {
+            val pair: Pair<ThreeArgumentsContainer?, EncodingStatus> = expressionParser.parseRegRegReg(
                 params = params,
                 registers = registers,
                 line = line
             )
             val status = pair.second
             val argumentsContainer = pair.first
-            if (status is Status.Success && argumentsContainer != null) {
+            if (status is EncodingStatus.Success && argumentsContainer != null) {
                 val firstRegIndex = argumentsContainer.param1.toInt()
                 val secondRegIndex = argumentsContainer.param2.toInt()
                 val thirdRegIndex = argumentsContainer.param3.toInt()
@@ -105,15 +104,15 @@ class OperationImplementations {
             return status
         }
 
-        fun OR(params: List<String>, registers: SnapshotStateList<Register>, line: Int): Status {
-            val pair: Pair<ThreeArgumentsContainer?, Status> = expressionParser.parseRegRegReg(
+        fun OR(params: List<String>, registers: SnapshotStateList<Register>, line: Int): EncodingStatus {
+            val pair: Pair<ThreeArgumentsContainer?, EncodingStatus> = expressionParser.parseRegRegReg(
                 params = params,
                 registers = registers,
                 line = line
             )
             val status = pair.second
             val argumentsContainer = pair.first
-            if (status is Status.Success && argumentsContainer != null) {
+            if (status is EncodingStatus.Success && argumentsContainer != null) {
                 val firstRegIndex = argumentsContainer.param1.toInt()
                 val secondRegIndex = argumentsContainer.param2.toInt()
                 val thirdRegIndex = argumentsContainer.param3.toInt()
@@ -124,15 +123,15 @@ class OperationImplementations {
             return status
         }
 
-        fun XOR(params: List<String>, registers: SnapshotStateList<Register>, line: Int): Status {
-            val pair: Pair<ThreeArgumentsContainer?, Status> = expressionParser.parseRegRegReg(
+        fun XOR(params: List<String>, registers: SnapshotStateList<Register>, line: Int): EncodingStatus {
+            val pair: Pair<ThreeArgumentsContainer?, EncodingStatus> = expressionParser.parseRegRegReg(
                 params = params,
                 registers = registers,
                 line = line
             )
             val status = pair.second
             val argumentsContainer = pair.first
-            if (status is Status.Success && argumentsContainer != null) {
+            if (status is EncodingStatus.Success && argumentsContainer != null) {
                 val firstRegIndex = argumentsContainer.param1.toInt()
                 val secondRegIndex = argumentsContainer.param2.toInt()
                 val thirdRegIndex = argumentsContainer.param3.toInt()
@@ -143,15 +142,15 @@ class OperationImplementations {
             return status
         }
 
-        fun SLL(params: List<String>, registers: SnapshotStateList<Register>, line: Int): Status {
-            val pair: Pair<ThreeArgumentsContainer?, Status> = expressionParser.parseRegRegReg(
+        fun SLL(params: List<String>, registers: SnapshotStateList<Register>, line: Int): EncodingStatus {
+            val pair: Pair<ThreeArgumentsContainer?, EncodingStatus> = expressionParser.parseRegRegReg(
                 params = params,
                 registers = registers,
                 line = line
             )
             val status = pair.second
             val argumentsContainer = pair.first
-            if (status is Status.Success && argumentsContainer != null) {
+            if (status is EncodingStatus.Success && argumentsContainer != null) {
                 val firstRegIndex = argumentsContainer.param1.toInt()
                 val secondRegIndex = argumentsContainer.param2.toInt()
                 val thirdRegIndex = argumentsContainer.param3.toInt()
@@ -162,15 +161,15 @@ class OperationImplementations {
             return status
         }
 
-        fun SRL(params: List<String>, registers: SnapshotStateList<Register>, line: Int): Status {
-            val pair: Pair<ThreeArgumentsContainer?, Status> = expressionParser.parseRegRegReg(
+        fun SRL(params: List<String>, registers: SnapshotStateList<Register>, line: Int): EncodingStatus {
+            val pair: Pair<ThreeArgumentsContainer?, EncodingStatus> = expressionParser.parseRegRegReg(
                 params = params,
                 registers = registers,
                 line = line
             )
             val status = pair.second
             val argumentsContainer = pair.first
-            if (status is Status.Success && argumentsContainer != null) {
+            if (status is EncodingStatus.Success && argumentsContainer != null) {
                 val firstRegIndex = argumentsContainer.param1.toInt()
                 val secondRegIndex = argumentsContainer.param2.toInt()
                 val thirdRegIndex = argumentsContainer.param3.toInt()
@@ -181,15 +180,15 @@ class OperationImplementations {
             return status
         }
 
-        fun SRA(params: List<String>, registers: SnapshotStateList<Register>, line: Int): Status {
-            val pair: Pair<ThreeArgumentsContainer?, Status> = expressionParser.parseRegRegReg(
+        fun SRA(params: List<String>, registers: SnapshotStateList<Register>, line: Int): EncodingStatus {
+            val pair: Pair<ThreeArgumentsContainer?, EncodingStatus> = expressionParser.parseRegRegReg(
                 params = params,
                 registers = registers,
                 line = line
             )
             val status = pair.second
             val argumentsContainer = pair.first
-            if (status is Status.Success && argumentsContainer != null) {
+            if (status is EncodingStatus.Success && argumentsContainer != null) {
                 val firstRegIndex = argumentsContainer.param1.toInt()
                 val secondRegIndex = argumentsContainer.param2.toInt()
                 val thirdRegIndex = argumentsContainer.param3.toInt()
@@ -201,15 +200,15 @@ class OperationImplementations {
         }
 
         //  I type commands
-        fun ADDI(params: List<String>, registers: SnapshotStateList<Register>, line: Int): Status {
-            val pair: Pair<ThreeArgumentsContainer?, Status> = expressionParser.parseRegRegInt(
+        fun ADDI(params: List<String>, registers: SnapshotStateList<Register>, line: Int): EncodingStatus {
+            val pair: Pair<ThreeArgumentsContainer?, EncodingStatus> = expressionParser.parseRegRegInt(
                 params = params,
                 registers = registers,
                 line = line
             )
             val status = pair.second
             val argumentsContainer = pair.first
-            if (status is Status.Success && argumentsContainer != null) {
+            if (status is EncodingStatus.Success && argumentsContainer != null) {
                 val firstRegIndex = argumentsContainer.param1.toInt()
                 val secondRegIndex = argumentsContainer.param2.toInt()
                 val int = argumentsContainer.param3.toInt()
@@ -218,15 +217,15 @@ class OperationImplementations {
             return status
         }
 
-        fun SLTI(params: List<String>, registers: SnapshotStateList<Register>, line: Int): Status {
-            val pair: Pair<ThreeArgumentsContainer?, Status> = expressionParser.parseRegRegInt(
+        fun SLTI(params: List<String>, registers: SnapshotStateList<Register>, line: Int): EncodingStatus {
+            val pair: Pair<ThreeArgumentsContainer?, EncodingStatus> = expressionParser.parseRegRegInt(
                 params = params,
                 registers = registers,
                 line = line
             )
             val status = pair.second
             val argumentsContainer = pair.first
-            if (status is Status.Success && argumentsContainer != null) {
+            if (status is EncodingStatus.Success && argumentsContainer != null) {
                 val firstRegIndex = argumentsContainer.param1.toInt()
                 val secondRegIndex = argumentsContainer.param2.toInt()
                 val int = argumentsContainer.param3.toInt()
@@ -234,8 +233,26 @@ class OperationImplementations {
             }
             return status
         }
+
+        fun SLTIU(params: List<String>, registers: SnapshotStateList<Register>, line: Int): EncodingStatus {
+            val pair: Pair<ThreeArgumentsContainer?, EncodingStatus> = expressionParser.parseRegRegInt(
+                params = params,
+                registers = registers,
+                line = line
+            )
+            val status = pair.second
+            val argumentsContainer = pair.first
+            if (status is EncodingStatus.Success && argumentsContainer != null) {
+                val firstRegIndex = argumentsContainer.param1.toInt()
+                val secondRegIndex = argumentsContainer.param2.toInt()
+                val int = argumentsContainer.param3.toInt()
+                registers[firstRegIndex].regValue = if (registers[secondRegIndex].regValue.toUInt() < int.toUInt()) 1 else 0
+            }
+            return status
+        }
+
+
         //  S type commands
-//z
 
         //  SB type commands
 
