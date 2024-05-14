@@ -20,7 +20,8 @@ import kotlinx.coroutines.launch
 import design.components.text_fields.CustomTextField
 import registers.RegistersViewModel
 import sys.CodeRunner
-import sys.EncodingStatus
+import sys.Memory
+import sys.RunStatus
 
 private enum class Element {
     PROCESSOR, ANALYZER
@@ -87,8 +88,9 @@ fun DefaultPage(
                             tint = Color.Unspecified,
                             modifier = Modifier.clickable {
                                 RegistersViewModel.nullifyRegisters()
-                                val status = codeRunner.runCode(code.value, RegistersViewModel.registers)
-                                error = if (status is EncodingStatus.Error) {
+                                Memory.clean()
+                                val status = codeRunner.runCode(code.value)
+                                error = if (status is RunStatus.Error) {
                                     status.errorMessage
                                 } else {
                                     ""

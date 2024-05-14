@@ -1,6 +1,6 @@
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import registers.Register
-import sys.EncodingStatus
+import sys.RunStatus
 
 class ExpressionParser {
     //returns three indexes of registers
@@ -8,11 +8,11 @@ class ExpressionParser {
         params: List<String>,
         registers: SnapshotStateList<Register>,
         line: Int
-    ): Pair<ThreeArgumentsContainer?, EncodingStatus> {
-        var encodingStatus: EncodingStatus = EncodingStatus.Success
+    ): Pair<ThreeArgumentsContainer?, RunStatus> {
+        var runStatus: RunStatus = RunStatus.Success
         var argumentsContainer: ThreeArgumentsContainer? = null
         if (params.size != 3) {
-            encodingStatus = EncodingStatus.Error("Line $line: error. Expected 3 arguments, but got ${params.size}.")
+            runStatus = RunStatus.Error("Line $line: error. Expected 3 arguments, but got ${params.size}.")
         } else {
             val param1 = params[0]
             val param2 = params[1]
@@ -21,7 +21,7 @@ class ExpressionParser {
             val index2 = registers.indexOfFirst { param2 in listOf(it.regName, it.regValue) }
             val index3 = registers.indexOfFirst { param3 in listOf(it.regName, it.regValue) }
             if (listOf(index1, index2, index3).contains(-1)) {
-                encodingStatus = EncodingStatus.Error("Line $line: error. Wrong arguments")
+                runStatus = RunStatus.Error("Line $line: error. Wrong arguments")
             } else {
                 argumentsContainer = ThreeArgumentsContainer(
                     param1 = index1.toString(),
@@ -30,7 +30,7 @@ class ExpressionParser {
                 )
             }
         }
-        return Pair(first = argumentsContainer, second = encodingStatus)
+        return Pair(first = argumentsContainer, second = runStatus)
     }
 
     //returns two indexes of registers and int
@@ -38,11 +38,11 @@ class ExpressionParser {
         params: List<String>,
         registers: SnapshotStateList<Register>,
         line: Int
-    ): Pair<ThreeArgumentsContainer?, EncodingStatus> {
-        var encodingStatus: EncodingStatus = EncodingStatus.Success
+    ): Pair<ThreeArgumentsContainer?, RunStatus> {
+        var runStatus: RunStatus = RunStatus.Success
         var argumentsContainer: ThreeArgumentsContainer? = null
         if (params.size != 3) {
-            encodingStatus = EncodingStatus.Error("Line $line: error. Expected 3 arguments, but got ${params.size}.")
+            runStatus = RunStatus.Error("Line $line: error. Expected 3 arguments, but got ${params.size}.")
         } else {
             val param1 = params[0]
             val param2 = params[1]
@@ -51,7 +51,7 @@ class ExpressionParser {
             val index2 = registers.indexOfFirst { param2 in listOf(it.regName, it.regValue) }
             val int = param3.toIntOrNull()
             if (listOf(index1, index2).contains(-1) || int == null) {
-                encodingStatus = EncodingStatus.Error("Line $line: error. Wrong arguments")
+                runStatus = RunStatus.Error("Line $line: error. Wrong arguments")
             } else {
                 argumentsContainer = ThreeArgumentsContainer(
                     param1 = index1.toString(),
@@ -60,6 +60,6 @@ class ExpressionParser {
                 )
             }
         }
-        return Pair(first = argumentsContainer, second = encodingStatus)
+        return Pair(first = argumentsContainer, second = runStatus)
     }
 }

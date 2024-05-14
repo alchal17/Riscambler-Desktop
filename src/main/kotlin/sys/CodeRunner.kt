@@ -1,11 +1,17 @@
 package sys
 
 import androidx.compose.runtime.snapshots.SnapshotStateList
+import command_encoder.Decoder
+import command_encoder.Encoder
+import command_encoder.EncoderStatus
+import constants_enums.Instruction
 import operations.LineData
 import operations.OpType
 import registers.Register
 
 class CodeRunner {
+    private val encoder = Encoder()
+    private val decoder = Decoder()
     private val operations = listOf(
         OpType.ArithmeticOps.ADD,
         OpType.ArithmeticOps.ADDI,
@@ -57,6 +63,7 @@ class CodeRunner {
         OpType.PseudoInstructionsOps.RET,
         OpType.PseudoInstructionsOps.NOP,
     )
+    private val operationsMap = operations.associateBy { it.name }
 
     private fun getOperation(codeLine: String): LineData? {
         val splitLine = codeLine.split(" ")
@@ -91,22 +98,57 @@ class CodeRunner {
         return ops
     }
 
-    private fun runLines(lineDataList: List<LineData>, registers: SnapshotStateList<Register>): EncodingStatus {
-        var encodingStatus: EncodingStatus = EncodingStatus.Success
+    private fun runLines(lineDataList: List<LineData>, registers: SnapshotStateList<Register>): RunStatus {
+        var encodingStatus: RunStatus = RunStatus.Success
         var operation: OpType
         lineDataList.forEachIndexed { index, lineData ->
             operation = operations.find { it.name == lineData.type.name }!!
             if (operation.commandFunction != null) {
                 encodingStatus = operation.commandFunction?.invoke(lineData.operands, registers, index + 1)!!
             }
-            if (encodingStatus is EncodingStatus.Error) return encodingStatus
+            if (encodingStatus is RunStatus.Error) return encodingStatus
         }
         return encodingStatus
     }
 
-    fun runCode(codeString: String, registers: SnapshotStateList<Register>): EncodingStatus {
-        val strippedLinesData = getLinesAsData(codeString)
-        return runLines(strippedLinesData, registers)
+    private fun encodeLines(code: String): RunStatus {
+        val lines = code.split("\n")
+        var status: EncoderStatus
+        lines.forEachIndexed { index, line ->
+            if (line.isNotEmpty()) {
+                status = encoder.encodeLine(line, index)
+                when (status) {
+                    is EncoderStatus.Error -> {
+                        return RunStatus.Error((status as EncoderStatus.Error).message)
+                    }
+
+                    is EncoderStatus.Success -> {
+                        Memory.value[index] =
+                            encoder.convertToUint(encoder.getEncodedInstruction((status as EncoderStatus.Success).instruction))
+                    }
+                }
+            }
+        }
+        println("Values in Memory: ${Memory.value.filter { it != null }.joinToString(",")}")
+        return RunStatus.Success
+    }
+
+    private fun decodeEntries() {
+        var instruction: Instruction
+        Memory.value.filter { it != null }.forEach {
+            if (it != null) {
+                instruction = decoder.decode(it)
+            }
+        }
+    }
+
+    fun runCode(code: String): RunStatus {
+//        val strippedLinesData = getLinesAsData(code)
+//        return runLines(strippedLinesData, registers)
+        val status = encodeLines(code)
+        if (status is RunStatus.Error) return status
+
+        return encodeLines(code)
     }
 
 

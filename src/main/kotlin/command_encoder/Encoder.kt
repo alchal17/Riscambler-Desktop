@@ -5,23 +5,28 @@ import constants_enums.ISACommandType
 import constants_enums.Instruction
 import funct7Map
 import funct3Map
+import operations.LineData
 
 class Encoder {
-    private fun split
-    fun encodeLine(codeLine: String): EncoderStatus {
+    private fun splitCodeLine(codeLine: String): Pair<String, List<String>> {
+        val splitLine = codeLine.trim().split(" ")
+        var copiedLine = codeLine
+        val command = splitLine[0]
+        copiedLine = copiedLine.replace(command, "").replace(" ", "")
+        val operands = copiedLine.split(",")
+        return Pair(command, operands)
+    }
+
+    fun encodeLine(codeLine: String, line: Int): EncoderStatus {
         //    ADDI x1, x4, 1000 -> (ADDI, [x1, x4, 1000])
-//        val splitLine = (codeLine.trim().replace(",", "")).split(" ")
-        val splitLine = codeLine.trim()
-        if (splitLine.size < 2) {
-            return EncoderStatus.Error("Not enough arguments")
-        }
+        val splitLine = splitCodeLine(codeLine)
 
-        val commandName = splitLine[0]
-        val params = splitLine.slice(1 until splitLine.size)
+        val commandName = splitLine.first
+        val params = splitLine.second
 
-        val commandType = commandNamesFormatMap[splitLine[0]]
+        val commandType = commandNamesFormatMap[commandName]
 
-        lateinit var instruction: Instruction
+        val instruction: Instruction
 
         when (commandType) {
             ISACommandType.R -> {
@@ -99,11 +104,9 @@ class Encoder {
             }
 
             else -> {
-                println("Type-unknown")
+                return EncoderStatus.Error("Unknown command: $commandName")
             }
         }
-
-//        return instruction
         return EncoderStatus.Success(instruction)
     }
 
@@ -131,7 +134,24 @@ class Encoder {
         return "${instruction.immediate4}${instruction.immediate3}${instruction.immediate2}${instruction.immediate1}${instruction.rd}${instruction.opcode}"
     }
 
-    fun convertToUint(encodedInstruction: String): UInt {
-        return encodedInstruction.toUInt()
+    fun getEncodedInstruction(instruction: Instruction): String {
+        return when (instruction) {
+            is Instruction.ICommand -> "${instruction.immediate}${instruction.rs1}${instruction.func3}${instruction.rd}${instruction.opcode}"
+            is Instruction.RCommand -> "${instruction.func7}${instruction.rs2}${instruction.rs1}${instruction.func3}${instruction.rd}${instruction.opcode}"
+            is Instruction.SBCommand -> "${instruction.immediate4}${instruction.immediate3}${instruction.rs2}${instruction.rs1}${instruction.func3}${instruction.immediate2}${instruction.immediate1}${instruction.opcode}"
+            is Instruction.SCommand -> "${instruction.immediate2}${instruction.rs2}${instruction.rs1}${instruction.func3}${instruction.immediate1}${instruction.opcode}"
+            is Instruction.UCommand -> "${instruction.immediate}${instruction.rd}${instruction.opcode}"
+            is Instruction.UJCommand -> "${instruction.immediate4}${instruction.immediate3}${instruction.immediate2}${instruction.immediate1}${instruction.rd}${instruction.opcode}"
+        }
+    }
+
+    fun convertToUint(encodedInstruction: String): ULong {
+        var copy = encodedInstruction
+        copy = copy.replaceFirst(copy.takeWhile { it == '0' }, "")
+        if (copy.isEmpty()) {
+            copy = "0"
+        }
+        println(copy)
+        return copy.toULong()
     }
 }

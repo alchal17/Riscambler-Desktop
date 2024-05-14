@@ -5,7 +5,7 @@ import constants_enums.ISACommandType
 import constants_enums.Instruction
 
 class Decoder {
-    fun decode(encodedEntry: UInt): Instruction {
+    fun decode(encodedEntry: ULong): Instruction {
         val binaryEntry = (encodedEntry.toString(2).padStart(32, '0')).reversed()
         val opcode = binaryEntry.substring(0, 7)
         val commandType = commandTypeByOpCode[opcode]

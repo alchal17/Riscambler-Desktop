@@ -6,7 +6,7 @@ val screenHeight = Toolkit.getDefaultToolkit().screenSize.height
 val screenWidth = Toolkit.getDefaultToolkit().screenSize.width
 
 
-val memory: Array<Any?> = arrayOfNulls(Int.MAX_VALUE / 32)
+//val memory: Array<Any?> = arrayOfNulls(Int.MAX_VALUE / 32)
 
 val commandTypeByOpCode = mapOf(
     "0110011" to ISACommandType.R,
