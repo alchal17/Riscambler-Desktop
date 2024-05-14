@@ -1,9 +1,7 @@
 package sys
 
-import androidx.compose.runtime.snapshots.SnapshotStateList
 import operations.LineData
 import operations.OpType
-import registers.Register
 
 class CodeRunner {
     private val operations = listOf(
@@ -57,6 +55,7 @@ class CodeRunner {
         OpType.PseudoInstructionsOps.RET,
         OpType.PseudoInstructionsOps.NOP,
     )
+    private val operationsMap = operations.associateBy { it.name }
 
     private fun getOperation(codeLine: String): LineData? {
         val splitLine = codeLine.split(" ")
@@ -73,7 +72,7 @@ class CodeRunner {
     }
 
     private fun getCmdAsEnum(command: String): OpType? {
-        return operations.find { it.name == command.uppercase() }
+        return operationsMap[command.uppercase()]
     }
 
     private fun getLinesAsData(userCode: String): List<LineData> {
@@ -91,24 +90,36 @@ class CodeRunner {
         return ops
     }
 
-    private fun runLines(lineDataList: List<LineData>, registers: SnapshotStateList<Register>): Status {
-        var status: Status = Status.Success
+    private fun runLines(lineDataList: List<LineData>): CodeExecutionStatus {
+        var status: CodeExecutionStatus = CodeExecutionStatus.Success
         var operation: OpType
         lineDataList.forEachIndexed { index, lineData ->
-            operation = operations.find { it.name == lineData.type.name }!!
+            operation = operationsMap[lineData.type.name] ?: throw Exception("Unknown operation")
             if (operation.commandFunction != null) {
-                status = operation.commandFunction?.invoke(lineData.operands, registers, index + 1)!!
+                status = operation.commandFunction?.invoke(lineData.operands, index + 1)!!
             }
-            if (status is Status.Error) return status
+            if (status is CodeExecutionStatus.Error) return status
         }
         return status
     }
 
-    fun runCode(codeString: String, registers: SnapshotStateList<Register>): Status {
+    fun runCode(codeString: String): CodeExecutionStatus {
         val strippedLinesData = getLinesAsData(codeString)
-        return runLines(strippedLinesData, registers)
+        return runLines(strippedLinesData)
     }
 
+//    fun runLine(line: String, number: Int){
+//        val splitLine = line.trim().split(" ")
+//        var copiedLine = line
+//        val command = splitLine[0]
+//        copiedLine = copiedLine.replace(command, "").replace(" ", "")
+//        val operands = copiedLine.split(",")
+//        val opType = getCmdAsEnum(command = command)
+//        if (opType != null) {
+//            val lineData = LineData(type = opType, operands = operands)
+//            lineData.type.commandFunction?.invoke(lineData.operands, number)
+//        }
+//    }
 
     private fun getSimilarCommands(command: String): List<String> {
         val commands =

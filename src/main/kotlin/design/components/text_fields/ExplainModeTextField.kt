@@ -23,6 +23,7 @@ fun ExplainModeTextField(explanation: String) {
         ) {
             TextField(
                 value = explanation,
+                readOnly = true,
                 onValueChange = { },
                 modifier = Modifier.fillMaxWidth().weight(10f),
                 colors = TextFieldDefaults.textFieldColors(

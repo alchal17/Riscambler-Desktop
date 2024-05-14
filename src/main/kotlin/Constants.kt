@@ -6,8 +6,25 @@ val screenHeight = Toolkit.getDefaultToolkit().screenSize.height
 val screenWidth = Toolkit.getDefaultToolkit().screenSize.width
 
 
-val memory: Array<Any?> = arrayOfNulls(Int.MAX_VALUE / 32)
+//val memory: Array<Any?> = arrayOfNulls(Int.MAX_VALUE / 32)
 
+val commandTypeByOpCode = mapOf(
+    "0110011" to ISACommandType.R,
+    "0010011" to ISACommandType.I,
+    "0100011" to ISACommandType.S,
+    "1100011" to ISACommandType.SB,
+    "0110111" to ISACommandType.U,
+    "1101111" to ISACommandType.UJ,
+)
+
+val opCodeByCommandType = mapOf(
+    ISACommandType.R to "0110011",
+    ISACommandType.I to "0010011",
+    ISACommandType.S to "0100011",
+    ISACommandType.SB to "1100011",
+    ISACommandType.U to "0110111",
+    ISACommandType.UJ to "1101111"
+)
 
 val commandNamesFormatMap = mapOf(
     // R type command

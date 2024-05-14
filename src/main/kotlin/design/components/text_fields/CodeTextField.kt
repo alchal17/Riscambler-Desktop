@@ -16,11 +16,20 @@ import screenHeight
 import screenWidth
 
 @Composable
-fun CustomTextField(code: MutableState<String>, vararg icons: @Composable () -> Unit, onTextChange: (String) -> Unit) {
+fun CustomTextField(
+    code: MutableState<String>,
+    icons: List<@Composable () -> Unit>,
+    onTextChange: (String) -> Unit,
+    readOnly: Boolean = false
+) {
     Box(modifier = Modifier.background(color = Color.LightGray)) {
-        Column(modifier = Modifier.fillMaxSize().padding((screenHeight / 150).dp), horizontalAlignment = Alignment.CenterHorizontally) {
+        Column(
+            modifier = Modifier.fillMaxSize().padding((screenHeight / 150).dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
             TextField(
                 value = code.value,
+                readOnly = readOnly,
                 onValueChange = onTextChange,
                 modifier = Modifier.fillMaxWidth().weight(10f),
                 colors = TextFieldDefaults.textFieldColors(
@@ -30,11 +39,11 @@ fun CustomTextField(code: MutableState<String>, vararg icons: @Composable () -> 
                     focusedIndicatorColor = Color.Transparent,
                     unfocusedIndicatorColor = Color.Transparent,
                     disabledIndicatorColor = Color.Transparent
-                ), textStyle = TextStyle(fontSize = ((screenHeight + screenWidth)/100).sp)
+                ), textStyle = TextStyle(fontSize = ((screenHeight + screenWidth) / 100).sp)
             )
             Row(
                 modifier = Modifier.fillMaxWidth(0.8f).padding(top = 5.dp),
-                horizontalArrangement = Arrangement.SpaceBetween
+                horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically
             ) {
                 icons.forEach { it() }
             }

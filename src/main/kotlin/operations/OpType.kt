@@ -2,22 +2,22 @@ package operations
 
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import registers.Register
-import sys.Status
+import sys.CodeExecutionStatus
 
 sealed class OpType(
     val name: String,
-    val commandFunction: ((params: List<String>, registers: SnapshotStateList<Register>, line: Int) -> Status)?
+    val commandFunction: ((params: List<String>, line: Int) -> CodeExecutionStatus)?
 ) {
     sealed class ArithmeticOps(
         name: String,
-        function: ((List<String>, SnapshotStateList<Register>, Int) -> Status)? = null
+        function: ((List<String>, Int) -> CodeExecutionStatus)? = null
     ) : OpType(name, function) {
         data object ADD : ArithmeticOps("ADD", OperationImplementations::ADD)       // Add
         data object ADDI : ArithmeticOps("ADDI", OperationImplementations::ADDI)    // Subtracts
         data object SUB : ArithmeticOps("SUB", OperationImplementations::SUB)       // Add immediate
         data object SLT : ArithmeticOps("SLT", OperationImplementations::SLT)       // Set less than
         data object SLTI : ArithmeticOps("SLTI", OperationImplementations::SLTI)    // Set less than immediate
-        data object SLTU : ArithmeticOps("SLTU")                                    // Set less than unsigned
+        data object SLTU : ArithmeticOps("SLTU", OperationImplementations::SLTU)                                    // Set less than unsigned
         data object SLTIU : ArithmeticOps("SLTIU")                                  // Set less than immediate unsigned
         data object LUI : ArithmeticOps("LUI")                                      // Load upper immediate
         data object AUIP : ArithmeticOps("AUIP")                                    // Add upper immediate to PC
@@ -25,7 +25,7 @@ sealed class OpType(
 
     sealed class LoadStoreOps(
         name: String,
-        function: ((List<String>, SnapshotStateList<Register>, Int) -> Status)? = null
+        function: ((List<String>, Int) -> CodeExecutionStatus)? = null
     ) : OpType(name, function) {
         data object LD : LoadStoreOps("LD")         // Load doubleword
         data object LW : LoadStoreOps("LW")         // Load word
@@ -42,7 +42,7 @@ sealed class OpType(
 
     sealed class LogicalOps(
         name: String,
-        function: ((List<String>, SnapshotStateList<Register>, Int) -> Status)? = null
+        function: ((List<String>, Int) -> CodeExecutionStatus)? = null
     ) : OpType(name, function) {
         data object AND : LogicalOps("AND", OperationImplementations::AND)             // AND
         data object OR : LogicalOps("OR")               // OR
@@ -60,7 +60,7 @@ sealed class OpType(
 
     sealed class BranchingOps(
         name: String,
-        function: ((List<String>, SnapshotStateList<Register>, Int) -> Status)? = null
+        function: ((List<String>, Int) -> CodeExecutionStatus)? = null
     ) : OpType(name, function) {
         data object BEQ : BranchingOps("BEQ")           // Branch equal
         data object BNE : BranchingOps("BNE")           // Branch not equal
@@ -74,7 +74,7 @@ sealed class OpType(
 
     sealed class PseudoInstructionsOps(
         name: String,
-        function: ((List<String>, SnapshotStateList<Register>, Int) -> Status)? = null
+        function: ((List<String>, Int) -> CodeExecutionStatus)? = null
     ) : OpType(name, function) {
         /*
         * Operations of type "branch if" are currently not listed.

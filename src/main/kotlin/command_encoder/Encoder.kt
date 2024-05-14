@@ -8,11 +8,15 @@ import funct3Map
 
 
 fun encodeLine(codeLine: String): Instruction {
-    val splitLine = (codeLine.trim().replace(",", "")).split(" ")
-
-    val commandName = splitLine[0]
-    val params = splitLine.slice(1 until splitLine.size)
-
+    var copy = codeLine
+//    val splitLine = (codeLine.trim().replace(",", "")).split(" ")
+    val trimmedLine = copy.trim()
+    val commandName = trimmedLine.split(" ")[0]
+    copy = copy.replace(commandName, "").replace(" ", "")
+//    val commandName = splitLine[0]
+    val params = copy.split(",")
+//    val params = splitLine.slice(1 until splitLine.size)
+    val splitLine: List<String> = mutableListOf(commandName) + params
     val commandType = commandNamesFormatMap[splitLine[0]]
 
     lateinit var instruction: Instruction

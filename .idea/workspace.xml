@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b1cd909f-bcb4-400d-b299-ee667159b8b3" name="Changes" comment="Now registers list is global">
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Constants.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Constants.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/ExpressionParser.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/ExpressionParser.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/command_encoder/Encoder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/command_encoder/Encoder.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/design/components/ProcessorSection.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/design/components/ProcessorSection.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/design/components/text_fields/CodeTextField.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/design/components/text_fields/CodeTextField.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/design/components/text_fields/DebugModeTextField.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/design/components/text_fields/DebugModeResultTextField.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/design/components/text_fields/ExplainModeTextField.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/design/components/text_fields/ExplainModeTextField.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/design/pages/DebugPage.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/design/pages/DebugPage.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/design/pages/DefaultPage.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/design/pages/DefaultPage.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/design/pages/EncodedPage.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/design/pages/EncodedPage.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/design/pages/ExplainPage.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/design/pages/ExplainPage.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/operations/OpType.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/operations/OpType.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/operations/OperationImplementations.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/operations/OperationImplementations.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/sys/CodeRunner.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/sys/CodeRunner.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/sys/Status.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/sys/CodeExecutionStatus.kt" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Riscambler-desktop" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Kotlin Interface" />
+        <option value="Kotlin Enum" />
+        <option value="Kotlin Object" />
+        <option value="Kotlin File" />
+        <option value="Kotlin Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;alchal17&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/alchal17/Riscambler-Desktop.git&quot;,
+    &quot;accountId&quot;: &quot;5eb2f3f6-b07d-4421-95ff-7d9f1699c612&quot;
+  }
+}</component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2d9BPgt6pBMcEjnshCR9caxZQ7I" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.Build Riscambler-Desktop.executor": "Run",
+    "Gradle.Preview: design.components.ProcessorSectionKt.Test.executor": "Run",
+    "Gradle.Riscambler-Desktop [createDistributable].executor": "Run",
+    "Gradle.Riscambler-Desktop [packageExe].executor": "Run",
+    "Gradle.desktop.executor": "Run",
+    "Kotlin.MainKt.executor": "Debug",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/sasha/IdeaProjects/riscambler_final/Riscambler-Desktop",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "kotlin-gradle-user-dirs": [
+      "/home/sasha/.gradle"
+    ]
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/icons" />
+      <recent name="$PROJECT_DIR$/src/main/resources/font" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/kotlin/new_design/components/text_fields" />
+      <recent name="$PROJECT_DIR$/src/main/kotlin/new_design/pages" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Gradle.desktop">
+    <configuration name="Riscambler-Desktop [createDistributable]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="createDistributable" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="Riscambler-Desktop [createDistributable]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="createDistributable" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="Riscambler-Desktop [packageExe]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="packageExe" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="Riscambler-Desktop [packageExe]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="packageExe" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.Riscambler-Desktop [packageExe]" />
+        <item itemvalue="Gradle.Riscambler-Desktop [createDistributable]" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.15989.150" />
+        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-IU-241.15989.150" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b1cd909f-bcb4-400d-b299-ee667159b8b3" name="Changes" comment="" />
+      <created>1709410391099</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1709410391099</updated>
+      <workItem from="1709410392260" duration="5699000" />
+      <workItem from="1709558480364" duration="548000" />
+      <workItem from="1709562413255" duration="3204000" />
+      <workItem from="1709568780172" duration="2732000" />
+      <workItem from="1709642120005" duration="31000" />
+      <workItem from="1709720163594" duration="2234000" />
+      <workItem from="1709752935084" duration="2605000" />
+      <workItem from="1709756114072" duration="677000" />
+      <workItem from="1709806838038" duration="801000" />
+      <workItem from="1709809308566" duration="2557000" />
+      <workItem from="1709812227985" duration="1567000" />
+      <workItem from="1709815377591" duration="1211000" />
+      <workItem from="1709819878876" duration="4875000" />
+      <workItem from="1709917595944" duration="10000" />
+      <workItem from="1709979893665" duration="220000" />
+      <workItem from="1710003076609" duration="35000" />
+      <workItem from="1710044233628" duration="19000" />
+      <workItem from="1710100827486" duration="6180000" />
+      <workItem from="1710169921507" duration="964000" />
+      <workItem from="1710239618267" duration="39000" />
+      <workItem from="1710239671487" duration="2807000" />
+      <workItem from="1710323938395" duration="2914000" />
+      <workItem from="1710327666696" duration="2307000" />
+      <workItem from="1710330895666" duration="2286000" />
+      <workItem from="1710410867409" duration="5348000" />
+      <workItem from="1710417372594" duration="4824000" />
+      <workItem from="1710425126994" duration="1066000" />
+      <workItem from="1710496132766" duration="4284000" />
+      <workItem from="1710502773397" duration="1928000" />
+      <workItem from="1710511887589" duration="664000" />
+      <workItem from="1710526552189" duration="566000" />
+      <workItem from="1710527574027" duration="451000" />
+      <workItem from="1710604734026" duration="3553000" />
+      <workItem from="1710680574717" duration="841000" />
+      <workItem from="1710760845367" duration="2000" />
+      <workItem from="1710765850541" duration="41000" />
+      <workItem from="1711106233310" duration="314000" />
+      <workItem from="1711109791504" duration="917000" />
+      <workItem from="1711356319594" duration="4705000" />
+      <workItem from="1711361920677" duration="2211000" />
+      <workItem from="1711369394658" duration="613000" />
+      <workItem from="1711397231248" duration="218000" />
+      <workItem from="1711399680308" duration="852000" />
+      <workItem from="1711533039145" duration="3659000" />
+      <workItem from="1711698820462" duration="1035000" />
+      <workItem from="1711842708408" duration="1575000" />
+      <workItem from="1711844297956" duration="2174000" />
+      <workItem from="1711962477743" duration="1396000" />
+      <workItem from="1711964813833" duration="1462000" />
+      <workItem from="1711970757306" duration="351000" />
+      <workItem from="1711974877889" duration="1214000" />
+      <workItem from="1711978045313" duration="290000" />
+      <workItem from="1712095173363" duration="1986000" />
+      <workItem from="1712150065333" duration="254000" />
+      <workItem from="1712150330504" duration="244000" />
+      <workItem from="1712151253344" duration="1334000" />
+      <workItem from="1712158552610" duration="388000" />
+      <workItem from="1712159284909" duration="1298000" />
+      <workItem from="1712160804531" duration="50000" />
+      <workItem from="1712160877713" duration="5666000" />
+      <workItem from="1712431932262" duration="2075000" />
+      <workItem from="1712507269605" duration="61000" />
+      <workItem from="1712508413736" duration="924000" />
+      <workItem from="1712584644317" duration="246000" />
+      <workItem from="1712676913540" duration="299000" />
+      <workItem from="1712677223661" duration="141000" />
+      <workItem from="1712738195236" duration="3025000" />
+      <workItem from="1712744439128" duration="1783000" />
+      <workItem from="1712746237129" duration="2583000" />
+      <workItem from="1712762199380" duration="4665000" />
+      <workItem from="1712776116344" duration="47000" />
+      <workItem from="1712776357478" duration="340000" />
+      <workItem from="1712776710325" duration="3015000" />
+      <workItem from="1712828230997" duration="274000" />
+      <workItem from="1712828556507" duration="2116000" />
+      <workItem from="1712831545246" duration="307000" />
+      <workItem from="1712831866348" duration="3171000" />
+      <workItem from="1713107720530" duration="516000" />
+      <workItem from="1713111027664" duration="2215000" />
+      <workItem from="1713190526173" duration="632000" />
+      <workItem from="1713191169252" duration="3050000" />
+      <workItem from="1713445896274" duration="678000" />
+      <workItem from="1713528213901" duration="208000" />
+      <workItem from="1713528458371" duration="78000" />
+      <workItem from="1713790961423" duration="112000" />
+      <workItem from="1714474415378" duration="293000" />
+      <workItem from="1714475054900" duration="136000" />
+      <workItem from="1714475642509" duration="613000" />
+      <workItem from="1714512297988" duration="70000" />
+      <workItem from="1714512377021" duration="101000" />
+      <workItem from="1714739790919" duration="655000" />
+      <workItem from="1715447947101" duration="43000" />
+      <workItem from="1715452160118" duration="114000" />
+      <workItem from="1715511622914" duration="498000" />
+      <workItem from="1715513334233" duration="25000" />
+      <workItem from="1715609464517" duration="699000" />
+      <workItem from="1715620294471" duration="1378000" />
+      <workItem from="1715642745272" duration="2000" />
+      <workItem from="1715661545526" duration="2390000" />
+      <workItem from="1715672211852" duration="18000" />
+      <workItem from="1715675576806" duration="7346000" />
+      <workItem from="1715691494041" duration="337000" />
+    </task>
+    <task id="LOCAL-00001" summary="Changing logo">
+      <option name="closed" value="true" />
+      <created>1709810053270</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1709810053270</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Adding loading screen">
+      <option name="closed" value="true" />
+      <created>1709813793904</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1709813793904</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Adding canvas for a processor">
+      <option name="closed" value="true" />
+      <created>1710329819861</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1710329819861</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Finishing processor canvas">
+      <option name="closed" value="true" />
+      <created>1710418569598</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1710418569598</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Making code more clean">
+      <option name="closed" value="true" />
+      <created>1710419273259</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1710419273259</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Adding icon to the processor canvas">
+      <option name="closed" value="true" />
+      <created>1710496857494</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1710496857494</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Adding icon to the processor canvas">
+      <option name="closed" value="true" />
+      <created>1710499034703</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1710499034703</updated>
+    </task>
+    <task id="LOCAL-00008" summary="User can now hover the cursor on register on browse more detailed info">
+      <option name="closed" value="true" />
+      <created>1711843453999</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1711843453999</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Adding new forms">
+      <option name="closed" value="true" />
+      <created>1711845467048</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1711845467048</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Making code cleaner">
+      <option name="closed" value="true" />
+      <created>1711978173326</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1711978173326</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Fixing a bug where a new content can be seen on a previous page">
+      <option name="closed" value="true" />
+      <created>1712097098605</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1712097098605</updated>
+    </task>
+    <task id="LOCAL-00012" summary="UI extended">
+      <option name="closed" value="true" />
+      <created>1712833193510</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1712833193510</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Now registers list is global">
+      <option name="closed" value="true" />
+      <created>1713191212388</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1713191212388</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Changing logo" />
+    <MESSAGE value="Adding loading screen" />
+    <MESSAGE value="Adding canvas for a processor" />
+    <MESSAGE value="Finishing processor canvas" />
+    <MESSAGE value="Making code more clean" />
+    <MESSAGE value="Adding icon to the processor canvas" />
+    <MESSAGE value="User can now hover the cursor on register on browse more detailed info" />
+    <MESSAGE value="Adding new forms" />
+    <MESSAGE value="Making code cleaner" />
+    <MESSAGE value="Fixing a bug where a new content can be seen on a previous page" />
+    <MESSAGE value="UI extended" />
+    <MESSAGE value="Now registers list is global" />
+    <option name="LAST_COMMIT_MESSAGE" value="Now registers list is global" />
+  </component>
+</project>

@@ -25,7 +25,7 @@ fun EncodedPage(code: MutableState<String>) {
         ) {
             Box(modifier = Modifier.padding((screenHeight / 80).dp)) {
                 CustomTextField(code,
-                    {
+                    listOf({
                         Icon(painter = painterResource("/icons/clean_field_button.svg"),
                             contentDescription = null,
                             tint = Color.Unspecified,
@@ -36,7 +36,7 @@ fun EncodedPage(code: MutableState<String>) {
                             contentDescription = null,
                             tint = Color.Unspecified
                         )
-                    },
+                    }),
                     onTextChange = { code.value = it }
                 )
             }

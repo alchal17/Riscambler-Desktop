@@ -35,8 +35,6 @@ fun main() = application {
             Box(
                 modifier = Modifier.fillMaxSize().background(color = Color(red = 56, green = 71, blue = 80))
                     .onSizeChanged { size ->
-//                        windowHeight = size.height
-//                        windowWidth = size.width
                         WindowSize.height = size.height
                         WindowSize.width = size.width
                     }) {
