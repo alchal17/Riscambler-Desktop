@@ -17,6 +17,15 @@ val commandTypeByOpCode = mapOf(
     "1101111" to ISACommandType.UJ,
 )
 
+val opCodeByCommandType = mapOf(
+    ISACommandType.R to "0110011",
+    ISACommandType.I to "0010011",
+    ISACommandType.S to "0100011",
+    ISACommandType.SB to "1100011",
+    ISACommandType.U to "0110111",
+    ISACommandType.UJ to "1101111"
+)
+
 val commandNamesFormatMap = mapOf(
     // R type command
     "ADD" to ISACommandType.R,

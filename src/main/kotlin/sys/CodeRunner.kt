@@ -1,9 +1,9 @@
 package sys
 
 import androidx.compose.runtime.snapshots.SnapshotStateList
-import command_encoder.Decoder
-import command_encoder.Encoder
-import command_encoder.EncoderStatus
+import linecoder.Decoder
+import linecoder.Encoder
+import linecoder.EncoderStatus
 import constants_enums.Instruction
 import operations.LineData
 import operations.OpType
