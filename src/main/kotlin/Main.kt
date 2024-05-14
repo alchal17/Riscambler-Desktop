@@ -13,12 +13,11 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowPlacement
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
-import design.WindowSize
 import design.Screens
-import kotlinx.coroutines.delay
+import design.WindowSize
 import design.pages.LoadingPage
 import design.pages.MainPage
-import registers.Register
+import kotlinx.coroutines.delay
 
 
 fun main() = application {
