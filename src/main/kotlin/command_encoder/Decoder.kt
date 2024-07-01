@@ -1,4 +1,4 @@
-package linecoder
+package command_encoder
 
 import commandTypeByOpCode
 import constants_enums.ISACommandType
